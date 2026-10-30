@@ -1,0 +1,1081 @@
+rows 8873898, TSV 7784.4 MB, 133 columns, profiled in 18s
+
+  #  column                      type                TSV MB  share   distinct  H0 b/v   rep%      exc  plain MB  best          MB
+ 15  URL                         String               697.0   9.0%    2391886   17.62  34.7%        0     698.0  dict       284.5
+  3  Title                       String               696.1   8.9%    1669254   13.57  31.9%        0     698.1  dict       233.6
+ 16  Referer                     String               641.2   8.2%    1518070   12.70  34.2%        0     642.1  dict       281.8
+ 22  URLCategories               Array(UInt16)        248.2   3.2%      17725    7.20  91.0%        0     248.2  dict        17.1
+ 21  RefererCategories           Array(UInt16)        193.6   2.5%      12295    5.20  68.3%        0     193.6  dict        15.9
+118  RefererHash                 UInt64               182.8   2.3%    1647268   12.89  33.2%        0      71.0  dict        36.5
+119  URLHash                     UInt64               181.2   2.3%    2768023   18.38  31.0%        0      71.0  dict        46.5
+  1  WatchID                     UInt64               177.5   2.3%  >=4194304     n/a   0.0%        0      71.0  for         68.8
+  5  EventTime                   DateTime             177.5   2.3%     604799   19.12   8.6%        0      35.5  for         22.2
+ 50  ClientEventTime             DateTime             177.5   2.3%     778112   19.23   7.1%        0      35.5  dict        25.2
+ 68  UTCEventTime                DateTime             177.5   2.3%     615959   19.13   8.6%        0      35.5  for         22.2
+ 11  UserID                      UInt64               174.6   2.2%     119689   14.29  85.9%        0      71.0  dict        19.8
+ 74  GeneralInterests            Array(UInt16)        163.6   2.1%      36125    8.02  86.9%        0     163.6  dict        19.0
+ 76  RemoteIP6                   FixedString(16)      152.2   2.0%      76430    4.73  94.4%        0     142.0  dict        20.2
+  9  ClientIP6                   FixedString(16)      152.1   2.0%      80953    4.98  94.3%        0     142.0  dict        20.3
+131  IslandID                    FixedString(16)      150.9   1.9%         23    0.00 100.0%        0     142.0  dict         5.5
+ 17  URLDomain                   String               150.8   1.9%      80668    9.67  88.5%        0     150.8  dict        20.6
+ 60  FUniqID                     UInt64               139.9   1.8%      36605   11.08  87.5%        0      71.0  dict        18.0
+  6  EventDate                   Date                  97.6   1.3%          7    2.80  97.6%        0      17.7  for          3.3
+ 75  RemoteIP                    UInt32                96.0   1.2%     191082   14.04  84.8%        0      35.5  dict        20.7
+  8  ClientIP                    UInt32                95.8   1.2%     204747   15.34  84.4%        0      35.5  dict        20.8
+ 18  RefererDomain               String                90.2   1.2%      37619    6.31  60.1%        0      90.2  dict        18.5
+ 61  HID                         UInt32                87.8   1.1%  >=4194304     n/a  31.8%        0      35.5  for         33.3
+  7  CounterID                   UInt32                72.4   0.9%     109760   10.37  97.1%        0      35.5  dict        19.2
+ 41  IPNetworkID                 UInt32                68.4   0.9%      15652   10.15  85.8%        0      35.5  dict        15.6
+ 23  URLRegions                  Array(UInt32)         62.9   0.8%       6010    4.33  92.3%        0      62.9  dict        14.5
+ 40  Params                      String                61.5   0.8%      25888    1.21  88.9%        0      61.5  dict        19.4
+ 24  RefererRegions              Array(UInt32)         52.9   0.7%       4186    3.42  69.7%        0      52.9  dict        14.5
+ 55  PageCharset                 String                52.8   0.7%          5    0.08  99.5%        0      52.8  dict         3.3
+130  ParsedParams.ValueDouble    Array(Float64)        49.8   0.6%     787854    2.17  87.5%        0      49.9  dict        47.8
+106  GoalsReached                Array(UInt32)         44.8   0.6%      18854    1.24  91.8%        0      44.9  dict        16.9
+ 25  ResolutionWidth             UInt16                43.2   0.6%       1080    3.84  87.5%        0      17.7  dict        12.2
+ 44  SearchPhrase                String                41.7   0.5%     132256    1.39  92.2%        0      41.7  dict        28.0
+125  ParsedParams.Key1           Array(String)         41.1   0.5%        468    0.87  90.2%        0      41.1  dict        10.0
+ 47  WindowClientWidth           UInt16                39.7   0.5%       2163    6.74  78.2%        0      17.7  dict        13.3
+ 77  WindowName                  Int32                 38.6   0.5%      65537    8.38  82.3%        0      35.5  for         18.9
+ 26  ResolutionHeight            UInt16                38.2   0.5%       2372    3.76  87.7%        0      17.7  dict        13.3
+126  ParsedParams.Key2           Array(String)         37.8   0.5%       9416    0.87  90.2%        0      37.8  dict        15.9
+ 10  RegionID                    UInt32                36.1   0.5%       4727    7.26  86.6%        0      35.5  dict        14.4
+104  ParamCurrency               FixedString(3)        35.5   0.5%          6    0.00 100.0%        0      26.6  dict         3.3
+ 56  CodeVersion                 UInt32                35.3   0.5%         27    2.90  90.3%        0      35.5  dict         5.5
+ 49  ClientTimeZone              Int16                 35.2   0.5%        105    2.68  90.5%        0      17.7  dict         7.8
+ 48  WindowClientHeight          UInt16                34.4   0.4%       4195    8.45  76.9%        0      17.7  dict        14.4
+127  ParsedParams.Key3           Array(String)         32.0   0.4%       2182    0.65  91.4%        0      32.0  dict        13.5
+ 97  NSToDOMContentLoadedTiming  Int32                 31.4   0.4%      52605    4.95  53.6%        0      35.5  dict        17.9
+ 92  DOMInteractiveTiming        Int32                 30.7   0.4%      45563    5.30  48.8%        0      35.5  dict        17.9
+132  RequestNum                  UInt32                30.2   0.4%      56581    9.53   6.9%        0      35.5  dict        17.9
+ 53  SilverlightVersion3         UInt32                29.8   0.4%         41    1.89  92.9%        0      35.5  dict         6.7
+ 88  ResponseStartTiming         Int32                 29.3   0.4%      18154    5.68  39.1%        0      35.5  dict        16.7
+128  ParsedParams.Key4           Array(String)         29.2   0.4%        179    0.56  92.3%        0      29.2  dict         8.9
+ 98  FirstPaintTiming            Int32                 29.1   0.4%      34351    2.97  72.2%        0      35.5  dict        17.8
+ 94  DOMCompleteTiming           Int32                 29.1   0.4%      48882    2.47  74.6%        0      35.5  dict        17.9
+ 95  LoadEventStartTiming        Int32                 29.1   0.4%      48348    2.46  74.6%        0      35.5  dict        17.9
+129  ParsedParams.Key5           Array(String)         29.0   0.4%        114    0.51  92.8%        0      29.0  dict         7.8
+ 30  FlashMinor2                 String                28.1   0.4%         36    1.68  92.1%        0      28.1  dict         6.7
+ 85  SendTiming                  Int32                 28.1   0.4%      17727    2.22  72.1%        0      35.5  dict        16.7
+ 93  DOMContentLoadedTiming      Int32                 27.4   0.4%      11726    3.58  56.2%        0      35.5  dict        15.6
+ 72  Interests                   UInt16                27.4   0.4%       1166    4.42  89.5%        0      17.7  dict        12.2
+ 89  ResponseEndTiming           Int32                 27.3   0.4%      22559    5.13  39.8%        0      35.5  dict        16.7
+ 78  OpenerName                  Int32                 26.6   0.3%          2    0.00 100.0%        0      35.5  dict         1.1
+ 34  UserAgentMinor              FixedString(2)        26.6   0.3%         51    1.34  94.9%        0      17.7  dict         6.7
+ 80  BrowserLanguage             FixedString(2)        26.6   0.3%         68    1.21  97.0%        0      17.7  dict         7.8
+ 81  BrowserCountry              FixedString(2)        26.6   0.3%        100    1.35  93.4%        0      17.7  dict         7.8
+ 99  RedirectCount               Int8                  26.6   0.3%          1    0.00 100.0%        0       8.9  const        0.0
+ 27  ResolutionDepth             UInt8                 26.4   0.3%          5    1.24  92.5%        0       8.9  dict         3.3
+ 96  LoadEventEndTiming          Int32                 25.9   0.3%       2944    1.28  75.3%        0      35.5  dict        13.3
+ 13  OS                          UInt8                 25.4   0.3%         68    2.44  90.5%        0       8.9  dict         7.8
+ 69  Age                         UInt8                 25.0   0.3%          6    2.34  87.4%        0       8.9  dict         3.3
+ 33  UserAgentMajor              UInt16                24.9   0.3%         51    3.77  87.9%        0      17.7  dict         6.7
+ 90  FetchTiming                 Int32                 23.9   0.3%      15307    2.81  58.3%        0      35.5  dict        15.6
+ 87  ConnectTiming               Int32                 23.6   0.3%       7212    2.52  58.8%        0      35.5  dict        14.4
+ 79  HistoryLength               Int16                 23.3   0.3%       1142    2.89  77.8%        0      17.7  dict        12.2
+ 91  RedirectTiming              Int32                 22.8   0.3%       9765    1.47  67.6%        0      35.5  dict        15.6
+ 86  DNSTiming                   Int32                 22.7   0.3%       6679    1.72  65.0%        0      35.5  dict        14.4
+ 42  TraficSourceID              Int8                  21.8   0.3%         10    2.02  59.2%        0       8.9  for          4.4
+ 14  UserAgent                   UInt8                 21.0   0.3%         64    3.07  88.6%        0       8.9  dict         6.7
+ 28  FlashMajor                  UInt8                 19.3   0.2%         11    1.40  92.7%        0       8.9  dict         4.4
+120  CLID                        UInt32                18.9   0.2%       1787    0.36  98.1%        0      35.5  dict        12.2
+ 73  Robotness                   UInt8                 18.9   0.2%        241    1.73  93.1%        0       8.9  plain        8.9
+ 29  FlashMinor                  UInt8                 18.3   0.2%         10    1.08  95.9%        0       8.9  for          4.4
+121  YCLID                       UInt64                18.0   0.2%       4385    0.03  99.9%        0      71.0  dict        14.5
+133  RequestTry                  UInt8                 17.9   0.2%        256    1.18  67.2%        0       8.9  plain        8.9
+ 38  MobilePhone                 UInt8                 17.9   0.2%         32    0.73  96.7%        0       8.9  dict         5.5
+ 43  SearchEngineID              UInt16                17.8   0.2%         71    0.61  89.3%        0      17.7  dict         7.8
+ 45  AdvEngineID                 UInt8                 17.8   0.2%         25    0.04  99.6%        0       8.9  dict         5.5
+102  ParamPrice                  Int64                 17.8   0.2%        275    0.00 100.0%        0      71.0  dict        10.0
+100  SocialSourceNetworkID       UInt8                 17.8   0.2%         25    0.13  98.2%        0       8.9  dict         5.5
+105  ParamCurrencyID             UInt16                17.8   0.2%          5    0.00 100.0%        0      17.7  dict         3.3
+ 54  SilverlightVersion4         UInt16                17.7   0.2%          3    0.00 100.0%        0      17.7  dict         2.2
+  2  JavaEnable                  UInt8                 17.7   0.2%          2    0.83  94.4%        0       8.9  for          1.1
+  4  GoodEvent                   Int16                 17.7   0.2%          1    0.00 100.0%        0      17.7  const        0.0
+ 12  CounterClass                Int8                  17.7   0.2%          2    0.58  99.1%        0       8.9  for          1.1
+ 19  Refresh                     UInt8                 17.7   0.2%          2    0.20  95.3%        0       8.9  for          1.1
+ 20  IsRobot                     UInt8                 17.7   0.2%          4    0.19  98.6%        0       8.9  dict         2.2
+ 31  NetMajor                    UInt8                 17.7   0.2%          5    0.28  99.1%        0       8.9  for          3.3
+ 32  NetMinor                    UInt8                 17.7   0.2%          6    0.25  99.2%        0       8.9  dict         3.3
+ 35  CookieEnable                UInt8                 17.7   0.2%          2    0.02  99.9%        0       8.9  for          1.1
+ 36  JavascriptEnable            UInt8                 17.7   0.2%          2    0.06  99.7%        0       8.9  for          1.1
+ 37  IsMobile                    UInt8                 17.7   0.2%          2    0.58  96.7%        0       8.9  for          1.1
+ 46  IsArtifical                 UInt8                 17.7   0.2%          2    0.87  68.1%        0       8.9  for          1.1
+ 51  SilverlightVersion1         UInt8                 17.7   0.2%          6    1.21  93.5%        0       8.9  for          3.3
+ 52  SilverlightVersion2         UInt8                 17.7   0.2%          3    0.85  94.7%        0       8.9  for          2.2
+ 57  IsLink                      UInt8                 17.7   0.2%          2    0.27  93.7%        0       8.9  for          1.1
+ 58  IsDownload                  UInt8                 17.7   0.2%          2    0.07  99.0%        0       8.9  for          1.1
+ 59  IsNotBounce                 UInt8                 17.7   0.2%          2    0.61  73.0%        0       8.9  for          1.1
+ 62  IsOldCounter                UInt8                 17.7   0.2%          2    0.00 100.0%        0       8.9  for          1.1
+ 63  IsEvent                     UInt8                 17.7   0.2%          1    0.00 100.0%        0       8.9  const        0.0
+ 64  IsParameter                 UInt8                 17.7   0.2%          2    0.31  96.8%        0       8.9  for          1.1
+ 65  DontCountHits               UInt8                 17.7   0.2%          2    0.85  66.0%        0       8.9  for          1.1
+ 66  WithHash                    UInt8                 17.7   0.2%          2    0.58  99.4%        0       8.9  for          1.1
+ 67  HitColor                    FixedString(1)        17.7   0.2%          3    0.93  86.0%        0       8.9  dict         2.2
+ 70  Sex                         UInt8                 17.7   0.2%          3    1.53  90.3%        0       8.9  for          2.2
+ 71  Income                      UInt8                 17.7   0.2%          4    1.53  90.6%        0       8.9  for          2.2
+ 84  HTTPError                   UInt16                17.7   0.2%          1    0.00 100.0%        0      17.7  const        0.0
+117  HasGCLID                    UInt8                 17.7   0.2%          2    0.02  99.8%        0       8.9  for          1.1
+ 39  MobilePhoneModel            String                17.0   0.2%        216    0.79  96.8%        0      17.0  dict         8.9
+116  FromTag                     String                11.7   0.2%       1527    0.16  98.7%        0      11.7  plain       11.7
+113  UTMCampaign                 String                10.2   0.1%       6262    0.24  98.7%        0      10.2  plain       10.2
+111  UTMSource                   String                10.1   0.1%       1715    0.23  98.7%        0      10.1  plain       10.1
+112  UTMMedium                   String                 9.8   0.1%        995    0.20  98.7%        0       9.8  plain        9.8
+101  SocialSourcePage            String                 9.8   0.1%       5208    0.12  99.1%        0       9.8  plain        9.8
+114  UTMContent                  String                 9.2   0.1%       3621    0.09  99.5%        0       9.2  plain        9.2
+115  UTMTerm                     String                 9.1   0.1%       3220    0.05  99.7%        0       9.1  plain        9.1
+107  OpenstatServiceName         String                 9.1   0.1%         14    0.02  99.8%        0       9.1  dict         4.4
+110  OpenstatSourceID            String                 9.1   0.1%        334    0.02  99.8%        0       9.1  plain        9.1
+109  OpenstatAdID                String                 9.0   0.1%       2330    0.03  99.8%        0       9.0  plain        9.0
+108  OpenstatCampaignID          String                 9.0   0.1%       1484    0.03  99.8%        0       9.0  plain        9.0
+124  ShareTitle                  String                 8.9   0.1%        151    0.00 100.0%        0       8.9  dict         8.9
+103  ParamOrderID                String                 8.9   0.1%        456    0.00 100.0%        0       8.9  plain        8.9
+123  ShareURL                    String                 8.9   0.1%        174    0.00 100.0%        0       8.9  dict         8.9
+122  ShareService                String                 8.9   0.1%          6    0.00 100.0%        0       8.9  dict         3.3
+ 82  SocialNetwork               String                 8.9   0.1%          1    0.00 100.0%        0       8.9  const        0.0
+ 83  SocialAction                String                 8.9   0.1%          1    0.00 100.0%        0       8.9  const        0.0
+
+total TSV 7784.4 MB; plain binary 6233.7 MB (80.1%); best simple scheme per column 2223.3 MB (28.6%)
+order-0 entropy of values 470.1 MB (columns over the distinct cap excluded): reference only
+
+
+==== details (schema order) ====
+
+[1] WatchID  UInt64
+  TSV 177.5 MB, distinct >=4194304, H0 n/a bit/value, repeat-prev 0.02%, exceptions 0
+  top: 0.00% 8476480323328385602 | 0.00% 8452689158507138641 | 0.00% 8829068086409261573 | 0.00% 4635177704939587051 | 0.00% 9032687743513512145
+  coverage: top1 0.00%, top3 0.00%, top15 0.00%, top255 0.01%, top4095 0.06%, top65535 0.75%
+  min 4611686725751467379, max 9223371678237104442, range 62 bit; value width p50/p90/p99/max 63/63/63/63; delta width 62/63/63/63
+  estimates MB: plain 71.0, for 68.8, delta 69.9
+
+[2] JavaEnable  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.83 bit/value, repeat-prev 94.38%, exceptions 0
+  top: 73.64% 1 | 26.36% 0
+  coverage: top1 73.64%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 1/1/1/1; delta width 0/0/2/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[3] Title  String
+  TSV 696.1 MB, distinct 1669254, H0 13.57 bit/value, repeat-prev 31.86%, exceptions 0
+  top: 27.18% "" | 2.48% "HD Tube 5* " | 0.65% "Играть кварти" | 0.40% "Berkesi - Phone" | 0.27% "Поиск. Все заказалась 135 тыс изоб\xd1"...
+  coverage: top1 27.18%, top3 30.31%, top15 32.54%, top255 39.27%, top4095 49.99%, top65535 66.73%
+  len min/avg/max 0/77.4/1775, empty 27.18%, escaped 1.82% [\':167374 \\:5407], avg LCP with prev 22.6, distinct bytes 208.0 MB
+  estimates MB: plain 698.1, dict 233.6
+
+[4] GoodEvent  Int16
+  TSV 17.7 MB, distinct 1, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% 1
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 1, max 1, range 0 bit; value width p50/p90/p99/max 2/2/2/2; delta width 0/0/0/0
+  estimates MB: const 0.0, plain 17.7, for 0.0, delta 0.0, dict 0.0
+
+[5] EventTime  DateTime
+  TSV 177.5 MB, distinct 604799, H0 19.12 bit/value, repeat-prev 8.63%, exceptions 0
+  top: 0.00% 2014-03-19 08:39:58 | 0.00% 2014-03-23 17:27:35 | 0.00% 2014-03-20 20:33:33 | 0.00% 2014-03-18 17:03:19 | 0.00% 2014-03-17 11:33:01
+  coverage: top1 0.00%, top3 0.00%, top15 0.02%, top255 0.21%, top4095 1.81%, top65535 17.97%
+  min 2014-03-17 00:00:00, max 2014-03-23 23:59:59, range 20 bit; value width p50/p90/p99/max 32/32/32/32; delta width 6/16/19/21
+  estimates MB: plain 35.5, for 22.2, delta 23.3, dict 23.7
+
+[6] EventDate  Date
+  TSV 97.6 MB, distinct 7, H0 2.80 bit/value, repeat-prev 97.57%, exceptions 0
+  top: 15.86% 2014-03-17 | 15.84% 2014-03-19 | 15.59% 2014-03-18 | 15.25% 2014-03-20 | 14.04% 2014-03-21
+  coverage: top1 15.86%, top3 47.29%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 2014-03-17, max 2014-03-23, range 3 bit; value width p50/p90/p99/max 15/15/15/15; delta width 0/0/3/4
+  estimates MB: plain 17.7, for 3.3, delta 4.4, dict 3.3
+
+[7] CounterID  UInt32
+  TSV 72.4 MB, distinct 109760, H0 10.37 bit/value, repeat-prev 97.12%, exceptions 0
+  top: 5.90% 1704509 | 5.36% 732797 | 3.80% 598875 | 2.84% 792887 | 2.21% 3807842
+  coverage: top1 5.90%, top3 15.06%, top15 29.26%, top255 59.16%, top4095 86.48%, top65535 99.18%
+  min 57, max 33554106, range 25 bit; value width p50/p90/p99/max 24/25/25/25; delta width 0/0/25/26
+  estimates MB: plain 35.5, for 27.7, delta 28.8, dict 19.2
+
+[8] ClientIP  UInt32
+  TSV 95.8 MB, distinct 204747, H0 15.34 bit/value, repeat-prev 84.43%, exceptions 0
+  top: 0.09% 2950145570 | 0.09% 2408492821 | 0.09% 2494028488 | 0.09% 1688720600 | 0.08% 356903718
+  coverage: top1 0.09%, top3 0.27%, top15 1.08%, top255 8.51%, top4095 39.42%, top65535 92.12%
+  min 0, max 4294891576, range 32 bit; value width p50/p90/p99/max 31/32/32/32; delta width 0/31/33/33
+  estimates MB: plain 35.5, for 35.5, delta 36.6, dict 20.8
+
+[9] ClientIP6  FixedString(16)
+  TSV 152.1 MB, distinct 80953, H0 4.98 bit/value, repeat-prev 94.34%, exceptions 0
+  top: 71.36% "\xcc\xc5:\xf3[\xa0\x03Uc\x83\xb8m\x9f\xd5\xfc\x1a" | 0.07% "\\0\x99@2\xd9\xf2\x02\xbb\xb0\xb9\xd7\x15w1\xeft" | 0.07% "Y\x88`\xcfԙ\xb2\xd7\xf0\xe4\x1a\vBv\\n\xfd" | 0.04% "\x1a\\f\xcfc\x99\x85\xf2~\xb7*\\tje\xc4eq" | 0.04% "\x1e\xe07`\xc4gҶ\x88*\xa6K\xaf\x89D\x86"
+  coverage: top1 71.36%, top3 71.50%, top15 71.87%, top255 74.58%, top4095 85.74%, top65535 99.78%
+  len min/avg/max 16/16.1/21, empty 0.00%, escaped 10.78% [\':143477 \0:146926 \\:150749 \b:143793 \f:143388 \n:161039 \r:152299 \t:152143], avg LCP with prev 15.2, distinct bytes 1.3 MB
+  unescaped length != 16: 0
+  estimates MB: plain 142.0, dict 20.3
+
+[10] RegionID  UInt32
+  TSV 36.1 MB, distinct 4727, H0 7.26 bit/value, repeat-prev 86.61%, exceptions 0
+  top: 14.78% 196 | 4.83% 3 | 3.61% 241 | 3.22% 207 | 2.23% 15887
+  coverage: top1 14.78%, top3 23.23%, top15 42.23%, top255 89.66%, top4095 99.99%, top65535 100.00%
+  min 0, max 131059, range 17 bit; value width p50/p90/p99/max 8/14/17/17; delta width 0/8/16/18
+  estimates MB: plain 35.5, for 18.9, delta 20.0, dict 14.4
+
+[11] UserID  UInt64
+  TSV 174.6 MB, distinct 119689, H0 14.29 bit/value, repeat-prev 85.94%, exceptions 0
+  top: 0.36% 1205491256153864188 | 0.23% 3228040076666004453 | 0.18% 2543118835429830843 | 0.15% 1961021224905272484 | 0.13% 4322253409885123546
+  coverage: top1 0.36%, top3 0.77%, top15 1.97%, top255 11.01%, top4095 51.71%, top65535 98.74%
+  min 2961521519262, max 18443935407054343235, range 64 bit; value width p50/p90/p99/max 61/63/64/64; delta width 0/61/64/64
+  estimates MB: plain 71.0, for 71.0, delta 71.0, dict 19.8
+
+[12] CounterClass  Int8
+  TSV 17.7 MB, distinct 2, H0 0.58 bit/value, repeat-prev 99.15%, exceptions 0
+  top: 86.12% 0 | 13.88% 1
+  coverage: top1 86.12%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/2/2/2; delta width 0/0/0/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[13] OS  UInt8
+  TSV 25.4 MB, distinct 68, H0 2.44 bit/value, repeat-prev 90.54%, exceptions 0
+  top: 54.00% 56 | 20.09% 3 | 5.53% 79 | 4.48% 42 | 3.27% 223
+  coverage: top1 54.00%, top3 79.62%, top15 96.96%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 240, range 8 bit; value width p50/p90/p99/max 6/7/8/8; delta width 0/0/9/9
+  estimates MB: plain 8.9, for 8.9, delta 10.0, dict 7.8
+
+[14] UserAgent  UInt8
+  TSV 21.0 MB, distinct 64, H0 3.07 bit/value, repeat-prev 88.64%, exceptions 0
+  top: 31.48% 4 | 14.66% 3 | 14.09% 2 | 13.11% 5 | 9.21% 122
+  coverage: top1 31.48%, top3 60.23%, top15 98.49%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 125, range 7 bit; value width p50/p90/p99/max 3/7/7/7; delta width 0/1/8/8
+  estimates MB: plain 8.9, for 7.8, delta 8.9, dict 6.7
+
+[15] URL  String
+  TSV 697.0 MB, distinct 2391886, H0 17.62 bit/value, repeat-prev 34.69%, exceptions 0
+  top: 3.51% "http://public_search" | 2.13% "http://auto.ru/chatay-barana.ru/traction.html#maybettaya" | 1.61% "http://korer.ru/categories.ru/?vkb" | 1.38% "http://main=hurriyet.com/iframe/frm_index.ru/photofunki-saye"... | 0.51% "http://korablitz.ru/L_1OFFERS_CRD "
+  coverage: top1 3.51%, top3 7.25%, top15 11.38%, top255 20.51%, top4095 31.80%, top65535 48.48%
+  len min/avg/max 0/77.5/2270, empty 0.07%, escaped 0.43% [\':8496 \0:5 \\:36053 \n:991 \r:123 \t:314], avg LCP with prev 38.8, distinct bytes 257.2 MB
+  estimates MB: plain 698.0, dict 284.5
+
+[16] Referer  String
+  TSV 641.2 MB, distinct 1518070, H0 12.70 bit/value, repeat-prev 34.23%, exceptions 0
+  top: 32.74% "" | 1.91% "http://vk.com/l.php?topic=502" | 0.76% "http://goodanies/sent-gamesearch" | 0.29% "http://luntikbalik" | 0.28% "http://m.auto.ru/videos/11559_po_algum_1001442"
+  coverage: top1 32.74%, top3 35.41%, top15 37.90%, top255 44.07%, top4095 52.77%, top65535 67.91%
+  len min/avg/max 0/71.3/2271, empty 32.74%, escaped 1.32% [\':9641 \0:4 \\:133471 \n:302 \r:881 \t:364], avg LCP with prev 23.9, distinct bytes 256.6 MB
+  estimates MB: plain 642.1, dict 281.8
+
+[17] URLDomain  String
+  TSV 150.8 MB, distinct 80668, H0 9.67 bit/value, repeat-prev 88.48%, exceptions 0
+  top: 8.44% "yandex.ru.livemaster" | 6.05% "yandex.ru.com" | 3.85% "onlain-port.ru.msn" | 2.84% "cars.autoliner.by" | 1.66% "ivi.ru.com"
+  coverage: top1 8.44%, top3 18.34%, top15 32.22%, top255 65.02%, top4095 90.42%, top65535 99.83%
+  len min/avg/max 0/16.0/123, empty 0.21%, escaped 0.00% [], avg LCP with prev 14.1, distinct bytes 1.6 MB
+  estimates MB: plain 150.8, dict 20.6
+
+[18] RefererDomain  String
+  TSV 90.2 MB, distinct 37619, H0 6.31 bit/value, repeat-prev 60.10%, exceptions 0
+  top: 32.75% "" | 9.78% "tanks.co.il" | 8.56% "yandex.ru" | 3.53% "solari.hurriyet" | 1.76% "news.yandex.ru"
+  coverage: top1 32.75%, top3 51.08%, top15 64.00%, top255 84.01%, top4095 96.95%, top65535 100.00%
+  len min/avg/max 0/9.2/81, empty 32.75%, escaped 0.00% [], avg LCP with prev 5.8, distinct bytes 0.7 MB
+  estimates MB: plain 90.2, dict 18.5
+
+[19] Refresh  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.20 bit/value, repeat-prev 95.32%, exceptions 0
+  top: 96.88% 0 | 3.12% 1
+  coverage: top1 96.88%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/0/1/1; delta width 0/0/2/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[20] IsRobot  UInt8
+  TSV 17.7 MB, distinct 4, H0 0.19 bit/value, repeat-prev 98.60%, exceptions 0
+  top: 97.05% 0 | 2.95% 2 | 0.01% 3 | 0.00% 4
+  coverage: top1 97.05%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 4, range 3 bit; value width p50/p90/p99/max 0/0/2/3; delta width 0/0/2/4
+  estimates MB: plain 8.9, for 3.3, delta 4.4, dict 2.2
+
+[21] RefererCategories  Array(UInt16)
+  TSV 193.6 MB, distinct 12295, H0 5.20 bit/value, repeat-prev 68.29%, exceptions 0
+  top: 49.15% "[]" | 4.68% "[1,2,5,4,6,7,9,15,30,27,56,65,117,122,102,162,232,353,392,10"... | 2.12% "[6,7,9,29,65,126,122,3849,7922,15940,13770]" | 1.48% "[29,7922,15940,13770]" | 1.21% "[5,4,49,50,150,3121,6479,7922,11773,10778,11910,15940,11503,"...
+  coverage: top1 49.15%, top3 55.96%, top15 67.23%, top255 89.97%, top4095 99.42%, top65535 100.00%
+  len min/avg/max 2/20.8/293, empty 0.00%, escaped 0.00% [], avg LCP with prev 12.7, distinct bytes 0.3 MB
+  estimates MB: plain 193.6, dict 15.9
+
+[22] URLCategories  Array(UInt16)
+  TSV 248.2 MB, distinct 17725, H0 7.20 bit/value, repeat-prev 90.98%, exceptions 0
+  top: 26.00% "[]" | 5.78% "[4,6,58,32,228,3912,4602,6866,14675,9813,12783,8563,14512,11"... | 4.08% "[1,3,4,6,5,7,13,15,26,29,45,83,80,101,79,231,165,333,310,864"... | 2.56% "[333,3912,4602,12814,14512,11161,13393,12818]" | 2.35% "[5,7,13,22,83,97,101,3676,6866,8563,11161]"
+  coverage: top1 26.00%, top3 35.86%, top15 51.44%, top255 81.93%, top4095 98.48%, top65535 100.00%
+  len min/avg/max 2/27.0/294, empty 0.00%, escaped 0.00% [], avg LCP with prev 24.7, distinct bytes 0.5 MB
+  estimates MB: plain 248.2, dict 17.1
+
+[23] URLRegions  Array(UInt32)
+  TSV 62.9 MB, distinct 6010, H0 4.33 bit/value, repeat-prev 92.28%, exceptions 0
+  top: 27.31% "[]" | 21.96% "[18]" | 9.30% "[18,348,1010]" | 6.71% "[18,348]" | 4.19% "[903]"
+  coverage: top1 27.31%, top3 58.57%, top15 83.96%, top255 97.12%, top4095 99.96%, top65535 100.00%
+  len min/avg/max 2/6.1/1471, empty 0.00%, escaped 0.00% [], avg LCP with prev 5.7, distinct bytes 0.1 MB
+  estimates MB: plain 62.9, dict 14.5
+
+[24] RefererRegions  Array(UInt32)
+  TSV 52.9 MB, distinct 4186, H0 3.42 bit/value, repeat-prev 69.75%, exceptions 0
+  top: 49.68% "[]" | 12.68% "[28]" | 7.50% "[28,267,694]" | 5.80% "[28,267]" | 3.06% "[996]"
+  coverage: top1 49.68%, top3 69.85%, top15 89.05%, top255 98.35%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 2/5.0/1481, empty 0.00%, escaped 0.00% [], avg LCP with prev 3.7, distinct bytes 0.1 MB
+  estimates MB: plain 52.9, dict 14.5
+
+[25] ResolutionWidth  UInt16
+  TSV 43.2 MB, distinct 1080, H0 3.84 bit/value, repeat-prev 87.45%, exceptions 0
+  top: 26.15% 1339 | 19.78% 1846 | 10.79% 1622 | 8.87% 1297 | 5.41% 1386
+  coverage: top1 26.15%, top3 56.72%, top15 91.00%, top255 99.73%, top4095 100.00%, top65535 100.00%
+  min 0, max 14754, range 14 bit; value width p50/p90/p99/max 11/11/11/14; delta width 0/9/12/15
+  estimates MB: plain 17.7, for 15.5, delta 16.6, dict 12.2
+
+[26] ResolutionHeight  UInt16
+  TSV 38.2 MB, distinct 2372, H0 3.76 bit/value, repeat-prev 87.72%, exceptions 0
+  top: 35.47% 555 | 14.01% 1640 | 10.21% 1583 | 9.94% 573 | 6.58% 952
+  coverage: top1 35.47%, top3 59.70%, top15 90.20%, top255 99.11%, top4095 100.00%, top65535 100.00%
+  min 0, max 16366, range 14 bit; value width p50/p90/p99/max 10/11/11/14; delta width 0/8/12/15
+  estimates MB: plain 17.7, for 15.5, delta 16.6, dict 13.3
+
+[27] ResolutionDepth  UInt8
+  TSV 26.4 MB, distinct 5, H0 1.24 bit/value, repeat-prev 92.51%, exceptions 0
+  top: 53.34% 29 | 42.49% 57 | 3.00% 0 | 1.16% 24 | 0.02% 13
+  coverage: top1 53.34%, top3 98.82%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 57, range 6 bit; value width p50/p90/p99/max 5/6/6/6; delta width 0/0/6/7
+  estimates MB: plain 8.9, for 6.7, delta 7.8, dict 3.3
+
+[28] FlashMajor  UInt8
+  TSV 19.3 MB, distinct 11, H0 1.40 bit/value, repeat-prev 92.67%, exceptions 0
+  top: 66.84% 8 | 16.00% 0 | 13.74% 10 | 2.83% 15 | 0.22% 13
+  coverage: top1 66.84%, top3 96.58%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 23, range 5 bit; value width p50/p90/p99/max 4/4/4/5; delta width 0/0/5/6
+  estimates MB: plain 8.9, for 5.5, delta 6.7, dict 4.4
+
+[29] FlashMinor  UInt8
+  TSV 18.3 MB, distinct 10, H0 1.08 bit/value, repeat-prev 95.94%, exceptions 0
+  top: 84.40% 0 | 4.21% 13 | 3.25% 1 | 1.68% 3 | 1.54% 15
+  coverage: top1 84.40%, top3 91.86%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 15, range 4 bit; value width p50/p90/p99/max 0/2/4/4; delta width 0/0/5/5
+  estimates MB: plain 8.9, for 4.4, delta 5.5, dict 4.4
+
+[30] FlashMinor2  String
+  TSV 28.1 MB, distinct 36, H0 1.68 bit/value, repeat-prev 92.14%, exceptions 0
+  top: 62.66% "0." | 16.25% "" | 15.75% "0.77" | 1.29% "900.17" | 0.99% "402.28"
+  coverage: top1 62.66%, top3 94.66%, top15 99.59%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/2.2/8, empty 16.25%, escaped 0.00% [], avg LCP with prev 2.0, distinct bytes 0.0 MB
+  estimates MB: plain 28.1, dict 6.7
+
+[31] NetMajor  UInt8
+  TSV 17.7 MB, distinct 5, H0 0.28 bit/value, repeat-prev 99.11%, exceptions 0
+  top: 95.64% 0 | 4.04% 3 | 0.29% 2 | 0.02% 1 | 0.00% 5
+  coverage: top1 95.64%, top3 99.98%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 5, range 3 bit; value width p50/p90/p99/max 0/0/2/3; delta width 0/0/0/4
+  estimates MB: plain 8.9, for 3.3, delta 4.4, dict 3.3
+
+[32] NetMinor  UInt8
+  TSV 17.7 MB, distinct 6, H0 0.25 bit/value, repeat-prev 99.20%, exceptions 0
+  top: 95.98% 0 | 4.00% 6 | 0.02% 1 | 0.00% 8 | 0.00% 2
+  coverage: top1 95.98%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 8, range 4 bit; value width p50/p90/p99/max 0/0/3/4; delta width 0/0/0/5
+  estimates MB: plain 8.9, for 4.4, delta 5.5, dict 3.3
+
+[33] UserAgentMajor  UInt16
+  TSV 24.9 MB, distinct 51, H0 3.77 bit/value, repeat-prev 87.86%, exceptions 0
+  top: 30.22% 44 | 10.90% 24 | 7.89% 14 | 6.26% 11 | 5.17% 27
+  coverage: top1 30.22%, top3 49.01%, top15 92.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 15013, range 14 bit; value width p50/p90/p99/max 5/6/6/14; delta width 0/4/7/15
+  estimates MB: plain 17.7, for 15.5, delta 16.6, dict 6.7
+
+[34] UserAgentMinor  FixedString(2)
+  TSV 26.6 MB, distinct 51, H0 1.34 bit/value, repeat-prev 94.86%, exceptions 0
+  top: 79.39% "s\xd7" | 6.80% "n\xe9" | 4.95% "RT" | 2.97% "8w" | 1.52% "qR"
+  coverage: top1 79.39%, top3 91.14%, top15 99.39%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 2/2.0/2, empty 0.00%, escaped 0.00% [], avg LCP with prev 1.9, distinct bytes 0.0 MB
+  unescaped length != 2: 0
+  estimates MB: plain 17.7, dict 6.7
+
+[35] CookieEnable  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.02 bit/value, repeat-prev 99.89%, exceptions 0
+  top: 99.81% 1 | 0.19% 0
+  coverage: top1 99.81%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 1/1/1/1; delta width 0/0/0/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[36] JavascriptEnable  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.06 bit/value, repeat-prev 99.69%, exceptions 0
+  top: 99.28% 1 | 0.72% 0
+  coverage: top1 99.28%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 1/1/1/1; delta width 0/0/0/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[37] IsMobile  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.58 bit/value, repeat-prev 96.66%, exceptions 0
+  top: 86.33% 0 | 13.67% 1
+  coverage: top1 86.33%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/1/1/1; delta width 0/0/2/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[38] MobilePhone  UInt8
+  TSV 17.9 MB, distinct 32, H0 0.73 bit/value, repeat-prev 96.70%, exceptions 0
+  top: 89.72% 0 | 4.36% 1 | 3.15% 7 | 1.01% 5 | 0.39% 4
+  coverage: top1 89.72%, top3 97.23%, top15 99.83%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 127, range 7 bit; value width p50/p90/p99/max 0/1/4/7; delta width 0/0/4/8
+  estimates MB: plain 8.9, for 7.8, delta 8.9, dict 5.5
+
+[39] MobilePhoneModel  String
+  TSV 17.0 MB, distinct 216, H0 0.79 bit/value, repeat-prev 96.79%, exceptions 0
+  top: 90.33% "" | 2.84% "LG Optimus" | 2.64% "iPhone 2" | 1.52% "S820_ROW" | 0.32% "Samsung Galaxy Note"
+  coverage: top1 90.33%, top3 95.81%, top15 98.96%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.9/31, empty 90.33%, escaped 0.00% [], avg LCP with prev 0.8, distinct bytes 0.0 MB
+  estimates MB: plain 17.0, dict 8.9
+
+[40] Params  String
+  TSV 61.5 MB, distinct 25888, H0 1.21 bit/value, repeat-prev 88.86%, exceptions 0
+  top: 91.03% "" | 0.46% "{\"Иллюстраницы\":{\"Письма\":\"показан\xd0"... | 0.34% "{\"gen_time\":\"438.044\"}}}}}}}}}}}}}}}}}}}},\"rnd\":5799289563" | 0.34% "{\"ya-disk-public pageParams\":{\"pdf\":{\"настроки\"}}}}}"... | 0.34% "{\"theme\":\"403.694\",\"split_lamoda_mobile\":\"5501.4482}"
+  coverage: top1 91.03%, top3 91.83%, top15 94.02%, top255 98.15%, top4095 99.60%, top65535 100.00%
+  len min/avg/max 0/5.9/3070, empty 91.03%, escaped 0.08% [\':605 \\:15195], avg LCP with prev 1.5, distinct bytes 2.7 MB
+  estimates MB: plain 61.5, dict 19.4
+
+[41] IPNetworkID  UInt32
+  TSV 68.4 MB, distinct 15652, H0 10.15 bit/value, repeat-prev 85.79%, exceptions 0
+  top: 3.87% 3238011 | 3.56% 1 | 3.50% 1117402 | 2.29% 1571935 | 1.37% 1062448
+  coverage: top1 3.87%, top3 10.92%, top15 22.99%, top255 54.81%, top4095 95.81%, top65535 100.00%
+  min 1, max 4193813, range 22 bit; value width p50/p90/p99/max 22/22/22/22; delta width 0/21/23/23
+  estimates MB: plain 35.5, for 24.4, delta 25.5, dict 15.6
+
+[42] TraficSourceID  Int8
+  TSV 21.8 MB, distinct 10, H0 2.02 bit/value, repeat-prev 59.15%, exceptions 0
+  top: 44.31% -1 | 31.82% 0 | 9.28% 3 | 8.13% 1 | 3.86% 5
+  coverage: top1 44.31%, top3 85.42%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min -1, max 10, range 4 bit; value width p50/p90/p99/max 1/3/5/5; delta width 0/3/5/5
+  estimates MB: plain 8.9, for 4.4, delta 5.5, dict 4.4
+
+[43] SearchEngineID  UInt16
+  TSV 17.8 MB, distinct 71, H0 0.61 bit/value, repeat-prev 89.26%, exceptions 0
+  top: 90.61% 0 | 5.62% 3 | 2.59% 2 | 0.44% 4 | 0.23% 15
+  coverage: top1 90.61%, top3 98.82%, top15 99.88%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 250, range 8 bit; value width p50/p90/p99/max 0/0/3/8; delta width 0/2/5/9
+  estimates MB: plain 17.7, for 8.9, delta 10.0, dict 7.8
+
+[44] SearchPhrase  String
+  TSV 41.7 MB, distinct 132256, H0 1.39 bit/value, repeat-prev 92.16%, exceptions 0
+  top: 93.16% "" | 0.04% "ст 12.168.0.1" | 0.03% "orton" | 0.02% "игры лица и гым чан дизайн" | 0.02% "imgsrc"
+  coverage: top1 93.16%, top3 93.23%, top15 93.41%, top255 94.26%, top4095 96.13%, top65535 99.12%
+  len min/avg/max 0/3.7/1564, empty 93.16%, escaped 0.01% [\':681 \\:662 \t:20], avg LCP with prev 1.3, distinct bytes 7.9 MB
+  estimates MB: plain 41.7, dict 28.0
+
+[45] AdvEngineID  UInt8
+  TSV 17.8 MB, distinct 25, H0 0.04 bit/value, repeat-prev 99.58%, exceptions 0
+  top: 99.65% 0 | 0.26% 3 | 0.03% 35 | 0.02% 30 | 0.01% 16
+  coverage: top1 99.65%, top3 99.94%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 62, range 6 bit; value width p50/p90/p99/max 0/0/0/6; delta width 0/0/0/7
+  estimates MB: plain 8.9, for 6.7, delta 7.8, dict 5.5
+
+[46] IsArtifical  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.87 bit/value, repeat-prev 68.11%, exceptions 0
+  top: 71.14% 0 | 28.86% 1
+  coverage: top1 71.14%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/1/1/1; delta width 0/2/2/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[47] WindowClientWidth  UInt16
+  TSV 39.7 MB, distinct 2163, H0 6.74 bit/value, repeat-prev 78.19%, exceptions 0
+  top: 8.98% 0 | 8.22% 1525 | 6.84% 1136 | 5.78% 592 | 4.81% 1119
+  coverage: top1 8.98%, top3 24.04%, top15 56.08%, top255 89.38%, top4095 100.00%, top65535 100.00%
+  min 0, max 14771, range 14 bit; value width p50/p90/p99/max 11/11/11/14; delta width 0/11/12/15
+  estimates MB: plain 17.7, for 15.5, delta 16.6, dict 13.3
+
+[48] WindowClientHeight  UInt16
+  TSV 34.4 MB, distinct 4195, H0 8.45 bit/value, repeat-prev 76.90%, exceptions 0
+  top: 9.06% 0 | 3.67% 593 | 2.60% 548 | 1.62% 547 | 1.53% 189
+  coverage: top1 9.06%, top3 15.34%, top15 27.37%, top255 74.89%, top4095 100.00%, top65535 100.00%
+  min 0, max 16335, range 14 bit; value width p50/p90/p99/max 10/10/11/14; delta width 0/10/11/15
+  estimates MB: plain 17.7, for 15.5, delta 16.6, dict 14.4
+
+[49] ClientTimeZone  Int16
+  TSV 35.2 MB, distinct 105, H0 2.68 bit/value, repeat-prev 90.55%, exceptions 0
+  top: 42.33% 157 | 21.55% 117 | 10.74% 209 | 8.31% 296 | 3.73% 441
+  coverage: top1 42.33%, top3 74.62%, top15 99.05%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min -1015, max 945, range 11 bit; value width p50/p90/p99/max 9/10/11/11; delta width 0/0/10/12
+  estimates MB: plain 17.7, for 12.2, delta 13.3, dict 7.8
+
+[50] ClientEventTime  DateTime
+  TSV 177.5 MB, distinct 778112, H0 19.23 bit/value, repeat-prev 7.08%, exceptions 0
+  top: 0.02% 1970-01-01 05:59:01 | 0.02% 1970-01-01 17:27:31 | 0.02% 1970-01-01 09:32:02 | 0.02% 1970-01-01 15:17:20 | 0.01% 1970-01-01 16:12:56
+  coverage: top1 0.02%, top3 0.06%, top15 0.17%, top255 0.47%, top4095 1.84%, top65535 17.39%
+  min 1970-01-01 03:00:01, max 2036-04-10 10:06:27, range 31 bit; value width p50/p90/p99/max 32/32/32/32; delta width 6/16/20/32
+  estimates MB: plain 35.5, for 34.4, delta 35.5, dict 25.2
+
+[51] SilverlightVersion1  UInt8
+  TSV 17.7 MB, distinct 6, H0 1.21 bit/value, repeat-prev 93.51%, exceptions 0
+  top: 65.95% 0 | 27.89% 5 | 4.97% 6 | 0.94% 3 | 0.16% 2
+  coverage: top1 65.95%, top3 98.80%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 6, range 3 bit; value width p50/p90/p99/max 0/3/3/3; delta width 0/0/4/4
+  estimates MB: plain 8.9, for 3.3, delta 4.4, dict 3.3
+
+[52] SilverlightVersion2  UInt8
+  TSV 17.7 MB, distinct 3, H0 0.85 bit/value, repeat-prev 94.68%, exceptions 0
+  top: 72.07% 0 | 27.93% 1 | 0.00% 2
+  coverage: top1 72.07%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 2, range 2 bit; value width p50/p90/p99/max 0/1/1/2; delta width 0/0/2/3
+  estimates MB: plain 8.9, for 2.2, delta 3.3, dict 2.2
+
+[53] SilverlightVersion3  UInt32
+  TSV 29.8 MB, distinct 41, H0 1.89 bit/value, repeat-prev 92.87%, exceptions 0
+  top: 65.95% 0 | 16.77% 19832 | 4.44% 24018 | 2.53% 14470 | 2.16% 29733
+  coverage: top1 65.95%, top3 87.16%, top15 98.68%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 60209, range 16 bit; value width p50/p90/p99/max 0/15/16/16; delta width 0/0/17/17
+  estimates MB: plain 35.5, for 17.7, delta 18.9, dict 6.7
+
+[54] SilverlightVersion4  UInt16
+  TSV 17.7 MB, distinct 3, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% 0 | 0.00% 14 | 0.00% 1
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 14, range 4 bit; value width p50/p90/p99/max 0/0/0/4; delta width 0/0/0/5
+  estimates MB: plain 17.7, for 4.4, delta 5.5, dict 2.2
+
+[55] PageCharset  String
+  TSV 52.8 MB, distinct 5, H0 0.08 bit/value, repeat-prev 99.55%, exceptions 0
+  top: 98.96% "utf-8" | 1.04% "" | 0.00% "koi8-u" | 0.00% "windows" | 0.00% "windows-1251"
+  coverage: top1 98.96%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/4.9/12, empty 1.04%, escaped 0.00% [], avg LCP with prev 4.9, distinct bytes 0.0 MB
+  estimates MB: plain 52.8, dict 3.3
+
+[56] CodeVersion  UInt32
+  TSV 35.3 MB, distinct 27, H0 2.90 bit/value, repeat-prev 90.26%, exceptions 0
+  top: 19.95% 330 | 17.38% 432 | 16.72% 291 | 12.98% 401 | 12.01% 331
+  coverage: top1 19.95%, top3 54.05%, top15 99.99%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1657, range 11 bit; value width p50/p90/p99/max 9/9/9/11; delta width 0/0/9/12
+  estimates MB: plain 35.5, for 12.2, delta 13.3, dict 5.5
+
+[57] IsLink  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.27 bit/value, repeat-prev 93.75%, exceptions 0
+  top: 95.45% 0 | 4.55% 1
+  coverage: top1 95.45%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/0/1/1; delta width 0/0/2/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[58] IsDownload  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.07 bit/value, repeat-prev 98.95%, exceptions 0
+  top: 99.14% 0 | 0.86% 1
+  coverage: top1 99.14%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/0/0/1; delta width 0/0/1/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[59] IsNotBounce  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.61 bit/value, repeat-prev 73.04%, exceptions 0
+  top: 84.96% 0 | 15.04% 1
+  coverage: top1 84.96%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/1/1/1; delta width 0/2/2/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[60] FUniqID  UInt64
+  TSV 139.9 MB, distinct 36605, H0 11.08 bit/value, repeat-prev 87.47%, exceptions 0
+  top: 23.50% 0 | 0.36% 8090707697056404177 | 0.23% 8017294492866060091 | 0.13% 8178002188278002030 | 0.12% 5669772058100890221
+  coverage: top1 23.50%, top3 24.09%, top15 25.22%, top255 34.07%, top4095 71.66%, top65535 100.00%
+  min 0, max 9223313629443448687, range 63 bit; value width p50/p90/p99/max 63/63/63/63; delta width 0/61/64/64
+  estimates MB: plain 71.0, for 69.9, delta 71.0, dict 18.0
+
+[61] HID  UInt32
+  TSV 87.8 MB, distinct >=4194304, H0 n/a bit/value, repeat-prev 31.76%, exceptions 0
+  top: 0.86% 0 | 0.03% 279237219 | 0.02% 505837758 | 0.02% 420793479 | 0.02% 232239751
+  coverage: top1 0.86%, top3 0.91%, top15 1.10%, top255 2.43%, top4095 6.92%, top65535 15.23%
+  min 0, max 1073741686, range 30 bit; value width p50/p90/p99/max 29/30/30/30; delta width 29/31/31/31
+  estimates MB: plain 35.5, for 33.3, delta 34.4
+
+[62] IsOldCounter  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% 0 | 0.00% 1
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/0/0/1; delta width 0/0/0/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[63] IsEvent  UInt8
+  TSV 17.7 MB, distinct 1, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% 0
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 0, range 0 bit; value width p50/p90/p99/max 0/0/0/0; delta width 0/0/0/0
+  estimates MB: const 0.0, plain 8.9, for 0.0, delta 0.0, dict 0.0
+
+[64] IsParameter  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.31 bit/value, repeat-prev 96.82%, exceptions 0
+  top: 94.36% 0 | 5.64% 1
+  coverage: top1 94.36%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/0/1/1; delta width 0/0/2/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[65] DontCountHits  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.85 bit/value, repeat-prev 66.00%, exceptions 0
+  top: 72.18% 0 | 27.82% 1
+  coverage: top1 72.18%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/1/1/1; delta width 0/2/2/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[66] WithHash  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.58 bit/value, repeat-prev 99.39%, exceptions 0
+  top: 86.26% 0 | 13.74% 1
+  coverage: top1 86.26%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/1/1/1; delta width 0/0/0/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[67] HitColor  FixedString(1)
+  TSV 17.7 MB, distinct 3, H0 0.93 bit/value, repeat-prev 85.99%, exceptions 0
+  top: 77.80% "E" | 17.42% "5" | 4.77% "c"
+  coverage: top1 77.80%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 1/1.0/1, empty 0.00%, escaped 0.00% [], avg LCP with prev 0.9, distinct bytes 0.0 MB
+  unescaped length != 1: 0
+  estimates MB: plain 8.9, dict 2.2
+
+[68] UTCEventTime  DateTime
+  TSV 177.5 MB, distinct 615959, H0 19.13 bit/value, repeat-prev 8.63%, exceptions 0
+  top: 0.00% 2014-03-23 23:48:03 | 0.00% 2014-03-20 03:21:35 | 0.00% 2014-03-19 21:42:08 | 0.00% 2014-03-18 11:55:48 | 0.00% 2014-03-18 00:39:19
+  coverage: top1 0.00%, top3 0.00%, top15 0.02%, top255 0.21%, top4095 1.81%, top65535 17.93%
+  min 2014-03-16 00:01:12, max 2014-03-24 23:59:59, range 20 bit; value width p50/p90/p99/max 32/32/32/32; delta width 6/16/19/21
+  estimates MB: plain 35.5, for 22.2, delta 23.3, dict 23.7
+
+[69] Age  UInt8
+  TSV 25.0 MB, distinct 6, H0 2.34 bit/value, repeat-prev 87.37%, exceptions 0
+  top: 36.21% 16 | 18.53% 0 | 15.41% 55 | 14.34% 39 | 11.77% 22
+  coverage: top1 36.21%, top3 70.16%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 55, range 6 bit; value width p50/p90/p99/max 5/6/6/6; delta width 0/5/7/7
+  estimates MB: plain 8.9, for 6.7, delta 7.8, dict 3.3
+
+[70] Sex  UInt8
+  TSV 17.7 MB, distinct 3, H0 1.53 bit/value, repeat-prev 90.31%, exceptions 0
+  top: 41.76% 1 | 36.60% 2 | 21.64% 0
+  coverage: top1 41.76%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 2, range 2 bit; value width p50/p90/p99/max 1/2/2/2; delta width 0/0/3/3
+  estimates MB: plain 8.9, for 2.2, delta 3.3, dict 2.2
+
+[71] Income  UInt8
+  TSV 17.7 MB, distinct 4, H0 1.53 bit/value, repeat-prev 90.57%, exceptions 0
+  top: 51.92% 2 | 26.46% 3 | 20.76% 0 | 0.86% 1
+  coverage: top1 51.92%, top3 99.14%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 3, range 2 bit; value width p50/p90/p99/max 2/2/2/2; delta width 0/0/3/3
+  estimates MB: plain 8.9, for 2.2, delta 3.3, dict 2.2
+
+[72] Interests  UInt16
+  TSV 27.4 MB, distinct 1166, H0 4.42 bit/value, repeat-prev 89.53%, exceptions 0
+  top: 52.12% 0 | 5.41% 119 | 2.69% 2 | 1.86% 53 | 1.78% 8643
+  coverage: top1 52.12%, top3 60.21%, top15 74.07%, top255 94.67%, top4095 100.00%, top65535 100.00%
+  min 0, max 16381, range 14 bit; value width p50/p90/p99/max 0/14/14/14; delta width 0/3/15/15
+  estimates MB: plain 17.7, for 15.5, delta 16.6, dict 12.2
+
+[73] Robotness  UInt8
+  TSV 18.9 MB, distinct 241, H0 1.73 bit/value, repeat-prev 93.08%, exceptions 0
+  top: 82.27% 0 | 0.91% 5 | 0.86% 6 | 0.86% 1 | 0.82% 3
+  coverage: top1 82.27%, top3 84.05%, top15 91.70%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 254, range 8 bit; value width p50/p90/p99/max 0/4/7/8; delta width 0/0/7/9
+  estimates MB: plain 8.9, for 8.9, delta 10.0, dict 8.9
+
+[74] GeneralInterests  Array(UInt16)
+  TSV 163.6 MB, distinct 36125, H0 8.02 bit/value, repeat-prev 86.92%, exceptions 0
+  top: 48.64% "[]" | 0.27% "[14]" | 0.22% "[6]" | 0.17% "[76]" | 0.16% "[5]"
+  coverage: top1 48.64%, top3 49.13%, top15 50.75%, top255 56.51%, top4095 77.72%, top65535 100.00%
+  len min/avg/max 2/17.4/51, empty 0.00%, escaped 0.00% [], avg LCP with prev 14.5, distinct bytes 1.2 MB
+  estimates MB: plain 163.6, dict 19.0
+
+[75] RemoteIP  UInt32
+  TSV 96.0 MB, distinct 191082, H0 14.04 bit/value, repeat-prev 84.85%, exceptions 0
+  top: 11.79% 2024189568 | 0.09% 2334790242 | 0.09% 2066467357 | 0.08% 490268112 | 0.07% 548147112
+  coverage: top1 11.79%, top3 11.97%, top15 12.70%, top255 18.95%, top4095 46.29%, top65535 93.38%
+  min 16898426, max 4294950708, range 32 bit; value width p50/p90/p99/max 31/32/32/32; delta width 0/31/33/33
+  estimates MB: plain 35.5, for 35.5, delta 36.6, dict 20.7
+
+[76] RemoteIP6  FixedString(16)
+  TSV 152.2 MB, distinct 76430, H0 4.73 bit/value, repeat-prev 94.42%, exceptions 0
+  top: 71.36% "\x94\xab\x17\xd0_Y\xa1\xd9\xcb\x06\x7f\xe35Ӵ." | 2.52% "NE\xae.\x93!Q\x96 \\tr\xe1P\xe3\x12\xf8" | 0.07% "ÊB\\0s\xf2\x11\x93\xa2y\xc5:7e\xf3+" | 0.07% "S\xa0]{\xfea\xcb\\\\r\v]\x8a\xf3(\x82L" | 0.04% "\x9a\xec\\\\\xb17\x93.\xb9M\x9b\xb8\x183\x059B"
+  coverage: top1 71.36%, top3 73.95%, top15 74.35%, top255 76.88%, top4095 87.16%, top65535 99.87%
+  len min/avg/max 16/16.1/21, empty 0.00%, escaped 12.67% [\':121126 \0:142863 \\:152811 \b:131597 \f:141597 \n:139119 \r:130304 \t:368812], avg LCP with prev 15.2, distinct bytes 1.3 MB
+  unescaped length != 16: 0
+  estimates MB: plain 142.0, dict 20.2
+
+[77] WindowName  Int32
+  TSV 38.6 MB, distinct 65537, H0 8.38 bit/value, repeat-prev 82.31%, exceptions 0
+  top: 52.41% -1 | 0.18% 7824 | 0.10% 38639 | 0.10% 18251 | 0.10% 23904
+  coverage: top1 52.41%, top3 52.69%, top15 53.63%, top255 55.85%, top4095 63.49%, top65535 100.00%
+  min -1, max 91567, range 17 bit; value width p50/p90/p99/max 1/17/17/18; delta width 0/15/17/18
+  estimates MB: plain 35.5, for 18.9, delta 20.0, dict 19.0
+
+[78] OpenerName  Int32
+  TSV 26.6 MB, distinct 2, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% -1 | 0.00% 1046
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min -1, max 1046, range 11 bit; value width p50/p90/p99/max 1/1/1/12; delta width 0/0/0/12
+  estimates MB: plain 35.5, for 12.2, delta 13.3, dict 1.1
+
+[79] HistoryLength  Int16
+  TSV 23.3 MB, distinct 1142, H0 2.89 bit/value, repeat-prev 77.75%, exceptions 0
+  top: 52.42% -1 | 12.68% 1 | 7.22% 2 | 5.30% 3 | 3.49% 5
+  coverage: top1 52.42%, top3 72.32%, top15 93.77%, top255 99.97%, top4095 100.00%, top65535 100.00%
+  min -1, max 3868, range 12 bit; value width p50/p90/p99/max 1/5/7/13; delta width 0/3/6/13
+  estimates MB: plain 17.7, for 13.3, delta 14.4, dict 12.2
+
+[80] BrowserLanguage  FixedString(2)
+  TSV 26.6 MB, distinct 68, H0 1.21 bit/value, repeat-prev 96.96%, exceptions 0
+  top: 81.53% "nD" | 7.29% "wi" | 5.54% "2W" | 0.94% "L\xc8" | 0.81% "wr"
+  coverage: top1 81.53%, top3 94.36%, top15 99.09%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 2/2.0/2, empty 0.00%, escaped 0.00% [], avg LCP with prev 1.9, distinct bytes 0.0 MB
+  unescaped length != 2: 0
+  estimates MB: plain 17.7, dict 7.8
+
+[81] BrowserCountry  FixedString(2)
+  TSV 26.6 MB, distinct 100, H0 1.35 bit/value, repeat-prev 93.36%, exceptions 0
+  top: 68.16% "\xa5\xb3" | 24.02% "Tp" | 4.07% "Ti" | 1.98% "I7" | 0.37% "IP"
+  coverage: top1 68.16%, top3 96.25%, top15 99.56%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 2/2.0/2, empty 0.00%, escaped 0.00% [], avg LCP with prev 1.9, distinct bytes 0.0 MB
+  unescaped length != 2: 0
+  estimates MB: plain 17.7, dict 7.8
+
+[82] SocialNetwork  String
+  TSV 8.9 MB, distinct 1, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% ""
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/0, empty 100.00%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: const 0.0, plain 8.9, dict 0.0
+
+[83] SocialAction  String
+  TSV 8.9 MB, distinct 1, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% ""
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/0, empty 100.00%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: const 0.0, plain 8.9, dict 0.0
+
+[84] HTTPError  UInt16
+  TSV 17.7 MB, distinct 1, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% 0
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 0, range 0 bit; value width p50/p90/p99/max 0/0/0/0; delta width 0/0/0/0
+  estimates MB: const 0.0, plain 17.7, for 0.0, delta 0.0, dict 0.0
+
+[85] SendTiming  Int32
+  TSV 28.1 MB, distinct 17727, H0 2.22 bit/value, repeat-prev 72.08%, exceptions 0
+  top: 85.29% -1 | 0.05% 94 | 0.04% 57 | 0.04% 68 | 0.04% 208
+  coverage: top1 85.29%, top3 85.38%, top15 85.82%, top255 91.26%, top4095 99.29%, top65535 100.00%
+  min -1, max 2058951, range 21 bit; value width p50/p90/p99/max 1/9/13/22; delta width 0/11/14/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 16.7
+
+[86] DNSTiming  Int32
+  TSV 22.7 MB, distinct 6679, H0 1.72 bit/value, repeat-prev 65.02%, exceptions 0
+  top: 50.44% -1 | 43.02% 0 | 1.69% 1 | 0.29% 2 | 0.19% 3
+  coverage: top1 50.44%, top3 95.15%, top15 96.56%, top255 99.34%, top4095 99.97%, top65535 100.00%
+  min -1, max 152840, range 18 bit; value width p50/p90/p99/max 1/1/9/19; delta width 0/2/10/19
+  estimates MB: plain 35.5, for 20.0, delta 21.1, dict 14.4
+
+[87] ConnectTiming  Int32
+  TSV 23.6 MB, distinct 7212, H0 2.52 bit/value, repeat-prev 58.75%, exceptions 0
+  top: 50.46% -1 | 35.66% 0 | 0.89% 1 | 0.53% 2 | 0.38% 3
+  coverage: top1 50.46%, top3 87.01%, top15 89.53%, top255 98.78%, top4095 99.96%, top65535 100.00%
+  min -1, max 213770, range 18 bit; value width p50/p90/p99/max 1/6/10/19; delta width 0/7/11/19
+  estimates MB: plain 35.5, for 20.0, delta 21.1, dict 14.4
+
+[88] ResponseStartTiming  Int32
+  TSV 29.3 MB, distinct 18154, H0 5.68 bit/value, repeat-prev 39.13%, exceptions 0
+  top: 50.45% -1 | 4.76% 0 | 2.33% 1 | 0.53% 3 | 0.19% 2
+  coverage: top1 50.45%, top3 57.53%, top15 59.68%, top255 79.90%, top4095 99.41%, top65535 100.00%
+  min -1, max 1179157, range 21 bit; value width p50/p90/p99/max 1/11/13/22; delta width 6/11/13/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 16.7
+
+[89] ResponseEndTiming  Int32
+  TSV 27.3 MB, distinct 22559, H0 5.13 bit/value, repeat-prev 39.82%, exceptions 0
+  top: 51.13% -1 | 4.04% 0 | 3.36% 1 | 2.23% 2 | 1.48% 3
+  coverage: top1 51.13%, top3 58.53%, top15 67.89%, top255 88.64%, top4095 99.36%, top65535 100.00%
+  min -1, max 2095479, range 21 bit; value width p50/p90/p99/max 1/10/13/22; delta width 3/10/14/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 16.7
+
+[90] FetchTiming  Int32
+  TSV 23.9 MB, distinct 15307, H0 2.81 bit/value, repeat-prev 58.25%, exceptions 0
+  top: 50.56% -1 | 33.06% 0 | 2.14% 1 | 1.14% 2 | 0.72% 3
+  coverage: top1 50.56%, top3 85.76%, top15 90.11%, top255 95.93%, top4095 99.75%, top65535 100.00%
+  min -1, max 2086811, range 21 bit; value width p50/p90/p99/max 1/5/12/22; delta width 0/8/13/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 15.6
+
+[91] RedirectTiming  Int32
+  TSV 22.8 MB, distinct 9765, H0 1.47 bit/value, repeat-prev 67.65%, exceptions 0
+  top: 50.45% -1 | 46.63% 0 | 0.02% 1 | 0.01% 68 | 0.01% 221
+  coverage: top1 50.45%, top3 97.10%, top15 97.20%, top255 98.44%, top4095 99.91%, top65535 100.00%
+  min -1, max 1676316, range 21 bit; value width p50/p90/p99/max 1/1/10/22; delta width 0/2/11/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 15.6
+
+[92] DOMInteractiveTiming  Int32
+  TSV 30.7 MB, distinct 45563, H0 5.30 bit/value, repeat-prev 48.81%, exceptions 0
+  top: 63.04% -1 | 1.02% 0 | 0.05% 1 | 0.04% 17 | 0.04% 133
+  coverage: top1 63.04%, top3 64.11%, top15 64.63%, top255 72.57%, top4095 96.48%, top65535 100.00%
+  min -1, max 2031609, range 21 bit; value width p50/p90/p99/max 1/12/15/22; delta width 3/13/16/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 17.9
+
+[93] DOMContentLoadedTiming  Int32
+  TSV 27.4 MB, distinct 11726, H0 3.58 bit/value, repeat-prev 56.17%, exceptions 0
+  top: 68.28% -1 | 3.93% 0 | 0.48% 1 | 0.30% 16 | 0.26% 19
+  coverage: top1 68.28%, top3 72.69%, top15 75.36%, top255 93.80%, top4095 99.85%, top65535 100.00%
+  min -1, max 1820120, range 21 bit; value width p50/p90/p99/max 1/9/12/22; delta width 0/9/12/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 15.6
+
+[94] DOMCompleteTiming  Int32
+  TSV 29.1 MB, distinct 48882, H0 2.47 bit/value, repeat-prev 74.61%, exceptions 0
+  top: 86.29% -1 | 0.01% 6 | 0.01% 5 | 0.01% 4 | 0.01% 7
+  coverage: top1 86.29%, top3 86.30%, top15 86.35%, top255 87.15%, top4095 94.54%, top65535 100.00%
+  min -1, max 2064551, range 21 bit; value width p50/p90/p99/max 1/12/15/22; delta width 0/14/16/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 17.9
+
+[95] LoadEventStartTiming  Int32
+  TSV 29.1 MB, distinct 48348, H0 2.46 bit/value, repeat-prev 74.65%, exceptions 0
+  top: 86.30% -1 | 0.02% 5 | 0.02% 6 | 0.01% 4 | 0.01% 7
+  coverage: top1 86.30%, top3 86.33%, top15 86.40%, top255 87.20%, top4095 94.57%, top65535 100.00%
+  min -1, max 2077522, range 21 bit; value width p50/p90/p99/max 1/12/15/22; delta width 0/14/16/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 17.9
+
+[96] LoadEventEndTiming  Int32
+  TSV 25.9 MB, distinct 2944, H0 1.28 bit/value, repeat-prev 75.33%, exceptions 0
+  top: 86.32% -1 | 2.95% 1 | 2.18% 0 | 1.55% 3 | 0.82% 2
+  coverage: top1 86.32%, top3 91.45%, top15 96.16%, top255 99.62%, top4095 100.00%, top65535 100.00%
+  min -1, max 87528, range 17 bit; value width p50/p90/p99/max 1/2/8/18; delta width 0/4/9/18
+  estimates MB: plain 35.5, for 18.9, delta 20.0, dict 13.3
+
+[97] NSToDOMContentLoadedTiming  Int32
+  TSV 31.4 MB, distinct 52605, H0 4.95 bit/value, repeat-prev 53.55%, exceptions 0
+  top: 68.16% -1 | 0.02% 631 | 0.02% 1008 | 0.02% 712 | 0.02% 532
+  coverage: top1 68.16%, top3 68.19%, top15 68.42%, top255 72.09%, top4095 94.59%, top65535 100.00%
+  min -1, max 2096483, range 21 bit; value width p50/p90/p99/max 1/13/15/22; delta width 0/13/16/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 17.9
+
+[98] FirstPaintTiming  Int32
+  TSV 29.1 MB, distinct 34351, H0 2.97 bit/value, repeat-prev 72.17%, exceptions 0
+  top: 81.06% -1 | 0.01% 386 | 0.01% 783 | 0.01% 358 | 0.01% 972
+  coverage: top1 81.06%, top3 81.09%, top15 81.26%, top255 84.43%, top4095 98.44%, top65535 100.00%
+  min -1, max 2094424, range 21 bit; value width p50/p90/p99/max 1/11/14/22; delta width 0/12/15/22
+  estimates MB: plain 35.5, for 23.3, delta 24.4, dict 17.8
+
+[99] RedirectCount  Int8
+  TSV 26.6 MB, distinct 1, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 100.00% -1
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min -1, max -1, range 0 bit; value width p50/p90/p99/max 1/1/1/1; delta width 0/0/0/0
+  estimates MB: const 0.0, plain 8.9, for 0.0, delta 0.0, dict 0.0
+
+[100] SocialSourceNetworkID  UInt8
+  TSV 17.8 MB, distinct 25, H0 0.13 bit/value, repeat-prev 98.24%, exceptions 0
+  top: 98.59% 0 | 0.66% 1 | 0.45% 5 | 0.20% 2 | 0.03% 3
+  coverage: top1 98.59%, top3 99.69%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 58, range 6 bit; value width p50/p90/p99/max 0/0/1/6; delta width 0/0/2/7
+  estimates MB: plain 8.9, for 6.7, delta 7.8, dict 5.5
+
+[101] SocialSourcePage  String
+  TSV 9.8 MB, distinct 5208, H0 0.12 bit/value, repeat-prev 99.15%, exceptions 0
+  top: 99.28% "" | 0.11% "live_muzikanasukh" | 0.06% "lub666626187" | 0.06% "profile/536949577643" | 0.05% "profile"
+  coverage: top1 99.28%, top3 99.45%, top15 99.65%, top255 99.82%, top4095 99.99%, top65535 100.00%
+  len min/avg/max 0/0.1/47, empty 99.28%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.1 MB
+  estimates MB: plain 9.8, dict 14.5
+
+[102] ParamPrice  Int64
+  TSV 17.8 MB, distinct 275, H0 0.00 bit/value, repeat-prev 99.98%, exceptions 0
+  top: 99.99% 0 | 0.01% 373 | 0.00% 338 | 0.00% 948794 | 0.00% 152365
+  coverage: top1 99.99%, top3 99.99%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 65699498, range 26 bit; value width p50/p90/p99/max 0/0/0/27; delta width 0/0/0/27
+  estimates MB: plain 71.0, for 28.8, delta 29.9, dict 10.0
+
+[103] ParamOrderID  String
+  TSV 8.9 MB, distinct 456, H0 0.00 bit/value, repeat-prev 99.98%, exceptions 0
+  top: 99.99% "" | 0.00% "74-8DE7-3B5C" | 0.00% "1230771568" | 0.00% "1234639283" | 0.00% "100"
+  coverage: top1 99.99%, top3 99.99%, top15 99.99%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/53, empty 99.99%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 8.9, dict 10.0
+
+[104] ParamCurrency  FixedString(3)
+  TSV 35.5 MB, distinct 6, H0 0.00 bit/value, repeat-prev 99.98%, exceptions 0
+  top: 99.99% "\a\xd2\x1f" | 0.01% "x3B" | 0.00% "n27" | 0.00% "zY8" | 0.00% "ZGX"
+  coverage: top1 99.99%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 3/3.0/3, empty 0.00%, escaped 0.00% [], avg LCP with prev 3.0, distinct bytes 0.0 MB
+  unescaped length != 3: 0
+  estimates MB: plain 26.6, dict 3.3
+
+[105] ParamCurrencyID  UInt16
+  TSV 17.8 MB, distinct 5, H0 0.00 bit/value, repeat-prev 99.98%, exceptions 0
+  top: 99.99% 0 | 0.01% 703 | 0.00% 726 | 0.00% 748 | 0.00% 897
+  coverage: top1 99.99%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 897, range 10 bit; value width p50/p90/p99/max 0/0/0/10; delta width 0/0/0/11
+  estimates MB: plain 17.7, for 11.1, delta 12.2, dict 3.3
+
+[106] GoalsReached  Array(UInt32)
+  TSV 44.8 MB, distinct 18854, H0 1.24 bit/value, repeat-prev 91.78%, exceptions 0
+  top: 90.17% "[]" | 2.46% "[2028343]" | 0.30% "[3337849]" | 0.30% "[3278201]" | 0.27% "[3122469,2402651,3172687,2165967,3580344,3385706,3892934,301"...
+  coverage: top1 90.17%, top3 92.92%, top15 94.59%, top255 97.61%, top4095 99.61%, top65535 100.00%
+  len min/avg/max 2/4.1/745, empty 0.00%, escaped 0.00% [], avg LCP with prev 2.5, distinct bytes 0.3 MB
+  estimates MB: plain 44.9, dict 16.9
+
+[107] OpenstatServiceName  String
+  TSV 9.1 MB, distinct 14, H0 0.02 bit/value, repeat-prev 99.83%, exceptions 0
+  top: 99.84% "" | 0.11% "direct.yandex.ru" | 0.02% "yandex" | 0.02% "direct" | 0.00% "direct.yandex"
+  coverage: top1 99.84%, top3 99.98%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/16, empty 99.84%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 9.1, dict 4.4
+
+[108] OpenstatCampaignID  String
+  TSV 9.0 MB, distinct 1484, H0 0.03 bit/value, repeat-prev 99.84%, exceptions 0
+  top: 99.87% "" | 0.02% "auto" | 0.02% "7177350693" | 0.00% "caption" | 0.00% "8360960"
+  coverage: top1 99.87%, top3 99.90%, top15 99.91%, top255 99.96%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/124, empty 99.87%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 9.0, dict 12.2
+
+[109] OpenstatAdID  String
+  TSV 9.0 MB, distinct 2330, H0 0.03 bit/value, repeat-prev 99.83%, exceptions 0
+  top: 99.87% "" | 0.00% "popular" | 0.00% "vendorFpriceM" | 0.00% "newPrice" | 0.00% "vendorGpriceL"
+  coverage: top1 99.87%, top3 99.87%, top15 99.88%, top255 99.93%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/31, empty 99.87%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 9.0, dict 13.3
+
+[110] OpenstatSourceID  String
+  TSV 9.1 MB, distinct 334, H0 0.02 bit/value, repeat-prev 99.85%, exceptions 0
+  top: 99.88% "" | 0.05% "yandex.ru:guarantee" | 0.03% "yandex.ru:premium" | 0.01% "yandex.ru:na" | 0.00% "yandex.ru:dynamic"
+  coverage: top1 99.88%, top3 99.96%, top15 99.98%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/35, empty 99.88%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 9.1, dict 10.0
+
+[111] UTMSource  String
+  TSV 10.1 MB, distinct 1715, H0 0.23 bit/value, repeat-prev 98.69%, exceptions 0
+  top: 98.47% "" | 0.09% "495" | 0.07% "11131" | 0.05% "Affliate_ngt_23" | 0.05% "r33"
+  coverage: top1 98.47%, top3 98.63%, top15 99.05%, top255 99.84%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.1/59, empty 98.47%, escaped 0.00% [], avg LCP with prev 0.1, distinct bytes 0.0 MB
+  estimates MB: plain 10.1, dict 12.2
+
+[112] UTMMedium  String
+  TSV 9.8 MB, distinct 995, H0 0.20 bit/value, repeat-prev 98.72%, exceptions 0
+  top: 98.54% "" | 0.32% "news" | 0.09% "cpc_reg" | 0.07% "ivideohaber" | 0.07% "info"
+  coverage: top1 98.54%, top3 98.95%, top15 99.37%, top255 99.94%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.1/44, empty 98.54%, escaped 0.00% [], avg LCP with prev 0.1, distinct bytes 0.0 MB
+  estimates MB: plain 9.8, dict 11.1
+
+[113] UTMCampaign  String
+  TSV 10.2 MB, distinct 6262, H0 0.24 bit/value, repeat-prev 98.73%, exceptions 0
+  top: 98.58% "" | 0.04% "elektronika_Redoute" | 0.04% "player" | 0.04% "CU_ru" | 0.03% "20140321_remindex"
+  coverage: top1 98.58%, top3 98.66%, top15 98.94%, top255 99.58%, top4095 99.96%, top65535 100.00%
+  len min/avg/max 0/0.2/94, empty 98.58%, escaped 0.00% [\':4 \\:8], avg LCP with prev 0.1, distinct bytes 0.1 MB
+  estimates MB: plain 10.2, dict 14.5
+
+[114] UTMContent  String
+  TSV 9.2 MB, distinct 3621, H0 0.09 bit/value, repeat-prev 99.46%, exceptions 0
+  top: 99.50% "" | 0.03% "e01" | 0.03% "lightawa" | 0.03% "e08" | 0.03% "5025"
+  coverage: top1 99.50%, top3 99.56%, top15 99.69%, top255 99.85%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/99, empty 99.50%, escaped 0.00% [\':2 \t:5], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 9.2, dict 13.4
+
+[115] UTMTerm  String
+  TSV 9.1 MB, distinct 3220, H0 0.05 bit/value, repeat-prev 99.72%, exceptions 0
+  top: 99.75% "" | 0.01% "10069907796" | 0.01% "112462" | 0.01% "kiyamama" | 0.01% "647"
+  coverage: top1 99.75%, top3 99.76%, top15 99.80%, top255 99.89%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/106, empty 99.75%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.1 MB
+  estimates MB: plain 9.1, dict 13.4
+
+[116] FromTag  String
+  TSV 11.7 MB, distinct 1527, H0 0.16 bit/value, repeat-prev 98.67%, exceptions 0
+  top: 98.87% "" | 0.17% "yandex.ru;yandsearch;web;;/web/item/title" | 0.09% "yandex" | 0.06% "yandex.ru;yandsearch;web;;/web/item" | 0.05% "yandex.ru;yandex"
+  coverage: top1 98.87%, top3 99.13%, top15 99.52%, top255 99.94%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.3/255, empty 98.87%, escaped 0.00% [], avg LCP with prev 0.1, distinct bytes 0.1 MB
+  estimates MB: plain 11.7, dict 12.3
+
+[117] HasGCLID  UInt8
+  TSV 17.7 MB, distinct 2, H0 0.02 bit/value, repeat-prev 99.77%, exceptions 0
+  top: 99.80% 0 | 0.20% 1
+  coverage: top1 99.80%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 1, range 1 bit; value width p50/p90/p99/max 0/0/0/1; delta width 0/0/0/2
+  estimates MB: plain 8.9, for 1.1, delta 2.2, dict 1.1
+
+[118] RefererHash  UInt64
+  TSV 182.8 MB, distinct 1647268, H0 12.89 bit/value, repeat-prev 33.21%, exceptions 0
+  top: 32.74% 15284527577228392792 | 1.91% 14270691585558329688 | 0.77% 6922718891101119046 | 0.32% 16849629357996259672 | 0.28% 4940176734225672697
+  coverage: top1 32.74%, top3 35.42%, top15 37.92%, top255 43.50%, top4095 51.37%, top65535 65.65%
+  min 6462102137031, max 18446733511317272920, range 64 bit; value width p50/p90/p99/max 64/64/64/64; delta width 62/64/64/64
+  estimates MB: plain 71.0, for 71.0, delta 71.0, dict 36.5
+
+[119] URLHash  UInt64
+  TSV 181.2 MB, distinct 2768023, H0 18.38 bit/value, repeat-prev 30.96%, exceptions 0
+  top: 3.52% 14270691585016129648 | 2.03% 6659478982557265075 | 0.40% 11743961923199887472 | 0.37% 6671266947280742203 | 0.30% 2472554877660426720
+  coverage: top1 3.52%, top3 5.94%, top15 8.67%, top255 16.94%, top4095 26.75%, top65535 42.38%
+  min 5607407991042, max 18446738815059683440, range 64 bit; value width p50/p90/p99/max 64/64/64/64; delta width 63/64/64/64
+  estimates MB: plain 71.0, for 71.0, delta 71.0, dict 46.5
+
+[120] CLID  UInt32
+  TSV 18.9 MB, distinct 1787, H0 0.36 bit/value, repeat-prev 98.12%, exceptions 0
+  top: 97.49% 0 | 0.27% 14662 | 0.12% 8440 | 0.11% 1752832 | 0.09% 1644327
+  coverage: top1 97.49%, top3 97.88%, top15 98.50%, top255 99.54%, top4095 100.00%, top65535 100.00%
+  min 0, max 4162420, range 22 bit; value width p50/p90/p99/max 0/0/21/22; delta width 0/0/22/23
+  estimates MB: plain 35.5, for 24.4, delta 25.5, dict 12.2
+
+[121] YCLID  UInt64
+  TSV 18.0 MB, distinct 4385, H0 0.03 bit/value, repeat-prev 99.86%, exceptions 0
+  top: 99.86% 0 | 0.00% 5068601257697127255 | 0.00% 5734064898184467654 | 0.00% 9084199698092051599 | 0.00% 6880540838988815841
+  coverage: top1 99.86%, top3 99.86%, top15 99.86%, top255 99.89%, top4095 100.00%, top65535 100.00%
+  min 0, max 9221200777577739281, range 63 bit; value width p50/p90/p99/max 0/0/0/63; delta width 0/0/0/64
+  estimates MB: plain 71.0, for 69.9, delta 71.0, dict 14.5
+
+[122] ShareService  String
+  TSV 8.9 MB, distinct 6, H0 0.00 bit/value, repeat-prev 99.99%, exceptions 0
+  top: 100.00% "" | 0.00% "odnoklassniki" | 0.00% "vkontakte" | 0.00% "vkontakt" | 0.00% "odnoklassn"
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/13, empty 100.00%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 8.9, dict 3.3
+
+[123] ShareURL  String
+  TSV 8.9 MB, distinct 174, H0 0.00 bit/value, repeat-prev 99.99%, exceptions 0
+  top: 100.00% "" | 0.00% "http://multicles/seasons/spring/?1&lang=ru&lr=1" | 0.00% "http://almaty.pulscen.kz/firms/99190193" | 0.00% "http://multicles/seasons/spring" | 0.00% "http://myshared.ru/slide/46"
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/92, empty 100.00%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 8.9, dict 8.9
+
+[124] ShareTitle  String
+  TSV 8.9 MB, distinct 151, H0 0.00 bit/value, repeat-prev 99.99%, exceptions 0
+  top: 100.00% "" | 0.00% "Почте" | 0.00% "Презентация на Яндекс.Видео" | 0.00% "ТИное открытанна тему: \"Менный по"... | 0.00% "Весеннее настроение в Яндекс.Поч"...
+  coverage: top1 100.00%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 0/0.0/231, empty 100.00%, escaped 0.00% [], avg LCP with prev 0.0, distinct bytes 0.0 MB
+  estimates MB: plain 8.9, dict 8.9
+
+[125] ParsedParams.Key1  Array(String)
+  TSV 41.1 MB, distinct 468, H0 0.87 bit/value, repeat-prev 90.22%, exceptions 0
+  top: 91.12% "[]" | 1.79% "['css_link_href']" | 0.89% "['gen_timestamp']" | 0.53% "['hasTemplates']" | 0.51% "['Эксперимент']"
+  coverage: top1 91.12%, top3 93.81%, top15 97.62%, top255 99.99%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 2/3.6/1169, empty 0.00%, escaped 0.00% [], avg LCP with prev 2.4, distinct bytes 0.1 MB
+  estimates MB: plain 41.1, dict 10.0
+
+[126] ParsedParams.Key2  Array(String)
+  TSV 37.8 MB, distinct 9416, H0 0.87 bit/value, repeat-prev 90.21%, exceptions 0
+  top: 91.12% "[]" | 3.52% "['']" | 0.58% "['Счетчик есть null']" | 0.47% "['Счетчика нет (10']" | 0.45% "['/f/1/global/banners_v1_1.js']"
+  coverage: top1 91.12%, top3 95.22%, top15 97.50%, top255 99.66%, top4095 99.94%, top65535 100.00%
+  len min/avg/max 2/3.3/1192, empty 0.00%, escaped 0.06% [\':804 \n:6311 \r:87 \t:6415], avg LCP with prev 2.3, distinct bytes 0.4 MB
+  estimates MB: plain 37.8, dict 15.9
+
+[127] ParsedParams.Key3  Array(String)
+  TSV 32.0 MB, distinct 2182, H0 0.65 bit/value, repeat-prev 91.44%, exceptions 0
+  top: 91.12% "[]" | 6.13% "['']" | 0.45% "['','']" | 0.38% "['проверить']" | 0.17% "['router']"
+  coverage: top1 91.12%, top3 97.70%, top15 99.23%, top255 99.96%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 2/2.6/1873, empty 0.00%, escaped 0.02% [\':2700], avg LCP with prev 2.1, distinct bytes 0.2 MB
+  estimates MB: plain 32.0, dict 13.5
+
+[128] ParsedParams.Key4  Array(String)
+  TSV 29.2 MB, distinct 179, H0 0.56 bit/value, repeat-prev 92.28%, exceptions 0
+  top: 91.12% "[]" | 7.10% "['']" | 0.52% "['','']" | 0.22% "['xls']" | 0.16% "['','','','']"
+  coverage: top1 91.12%, top3 98.74%, top15 99.82%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 2/2.3/730, empty 0.00%, escaped 0.00% [], avg LCP with prev 2.1, distinct bytes 0.0 MB
+  estimates MB: plain 29.2, dict 8.9
+
+[129] ParsedParams.Key5  Array(String)
+  TSV 29.0 MB, distinct 114, H0 0.51 bit/value, repeat-prev 92.76%, exceptions 0
+  top: 91.12% "[]" | 7.72% "['']" | 0.53% "['','']" | 0.17% "['','','']" | 0.16% "['','','','']"
+  coverage: top1 91.12%, top3 99.37%, top15 99.98%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 2/2.3/370, empty 0.00%, escaped 0.00% [], avg LCP with prev 2.1, distinct bytes 0.0 MB
+  estimates MB: plain 29.0, dict 7.8
+
+[130] ParsedParams.ValueDouble  Array(Float64)
+  TSV 49.8 MB, distinct 787854, H0 2.17 bit/value, repeat-prev 87.55%, exceptions 0
+  top: 91.12% "[]" | 0.00% "[2.2806851486435803e-308,2.6064973127355203e-308,2.932309476"... | 0.00% "[9.7743649227582e-309,1.30324865636776e-308,1.6290608204597e"... | 0.00% "[6.5162432818388e-309]" | 0.00% "[3.2581216409194e-309]"
+  coverage: top1 91.12%, top3 91.12%, top15 91.12%, top255 91.12%, top4095 91.17%, top65535 91.86%
+  len min/avg/max 2/4.6/2867, empty 0.00%, escaped 0.00% [], avg LCP with prev 2.2, distinct bytes 24.8 MB
+  estimates MB: plain 49.9, dict 47.8
+
+[131] IslandID  FixedString(16)
+  TSV 150.9 MB, distinct 23, H0 0.00 bit/value, repeat-prev 100.00%, exceptions 0
+  top: 99.99% "\xc1\x88\x9e+\x9a\xd1\xe2\x19\xed\x04\xc0\xe9bKQ9" | 0.01% "\x06k/\x10ŝsY\xe4\xd9r\x8aa\\tV\x9d" | 0.00% "y8\xbb\xc8\xd9~F\x9be23 \xae\xc4\xdaC" | 0.00% "o\xab{\x94l>ga\x8b;B\xecOf\xaef" | 0.00% "ed\x8dcVqh\xb7FIO4\xc1z\xce\x05"
+  coverage: top1 99.99%, top3 100.00%, top15 100.00%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  len min/avg/max 16/16.0/17, empty 0.00%, escaped 0.01% [\':3 \0:4 \r:2 \t:988], avg LCP with prev 16.0, distinct bytes 0.0 MB
+  unescaped length != 16: 0
+  estimates MB: plain 142.0, dict 5.5
+
+[132] RequestNum  UInt32
+  TSV 30.2 MB, distinct 56581, H0 9.53 bit/value, repeat-prev 6.87%, exceptions 0
+  top: 6.31% 1 | 6.15% 0 | 4.52% 2 | 2.78% 3 | 2.22% 6
+  coverage: top1 6.31%, top3 16.98%, top15 32.85%, top255 64.77%, top4095 93.40%, top65535 100.00%
+  min 0, max 1005683, range 20 bit; value width p50/p90/p99/max 7/12/15/20; delta width 6/11/14/21
+  estimates MB: plain 35.5, for 22.2, delta 23.3, dict 17.9
+
+[133] RequestTry  UInt8
+  TSV 17.9 MB, distinct 256, H0 1.18 bit/value, repeat-prev 67.17%, exceptions 0
+  top: 65.56% 0 | 32.02% 1 | 0.93% 2 | 0.15% 3 | 0.06% 6
+  coverage: top1 65.56%, top3 98.51%, top15 99.02%, top255 100.00%, top4095 100.00%, top65535 100.00%
+  min 0, max 255, range 8 bit; value width p50/p90/p99/max 0/1/4/8; delta width 0/2/4/9
+  estimates MB: plain 8.9, for 8.9, delta 10.0, dict 8.9
