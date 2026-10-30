@@ -1,15 +1,3 @@
-// Package codec implements the columnar binary format for the dataset.
-//
-// File layout (integers little-endian):
-//
-//	"HBC1" rows:u64 ncols:u32
-//	ncols × { name:u16-prefixed, type:u16-prefixed, blobLen:u64 }
-//	ncols × blob
-//
-// Every blob is one column encoded independently of the others (see
-// intcol.go and bytescol.go). A value is decoded from its own code, the
-// previous value of the same column and the column header (dictionary,
-// code widths).
 package codec
 
 import (
@@ -18,14 +6,16 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"slices"
 	"sync"
 	"sync/atomic"
 
+	"hasd/lab3/internal/cm"
 	"hasd/lab3/internal/schema"
 	"hasd/lab3/internal/tsv"
 )
 
-const magic = "HBC1"
+const magic = "HBC2"
 
 type collector interface {
 	observe(v []byte)
@@ -35,7 +25,7 @@ type collector interface {
 
 type encoder interface {
 	encode(v []byte)
-	finish() []byte
+	finish() ([]byte, []*stream)
 	describe() string
 }
 
@@ -45,18 +35,24 @@ type decoder interface {
 
 type Options struct {
 	Workers   int
-	ChunkSize int // bytes read per batch
+	ChunkSize int
 }
 
 type ColumnReport struct {
-	Column   schema.Column
-	Codec    string
-	RawBytes uint64 // bytes in the TSV, separator included
-	EncBytes uint64
+	Column      schema.Column
+	Codec       string
+	RawBytes    uint64
+	StreamBytes uint64
+	EncBytes    uint64
 }
 
-// Encode reads the TSV twice: pass 1 collects statistics and dictionaries,
-// then every column picks its encoding, pass 2 writes the row codes.
+type segment struct {
+	col   int
+	width int
+	raw   []byte
+	comp  []byte
+}
+
 func Encode(in io.ReadSeeker, cols []schema.Column, out io.Writer, opt Options) (uint64, []ColumnReport, error) {
 	stats := make([]collector, len(cols))
 	for i, c := range cols {
@@ -95,13 +91,41 @@ func Encode(in io.ReadSeeker, cols []schema.Column, out io.Writer, opt Options) 
 		return 0, nil, fmt.Errorf("codec: input changed between passes (%d rows, then %d)", rows, rows2)
 	}
 
-	blobs := make([][]byte, len(cols))
-	parallel(len(cols), opt.Workers, func(i int) {
-		blobs[i] = encs[i].finish()
-		reps[i].Codec = encs[i].describe()
-		reps[i].EncBytes = uint64(len(blobs[i]))
+	hdrs := make([][]byte, len(cols))
+	segs := make([][]*segment, len(cols))
+	var all []*segment
+	for i, e := range encs {
+		var streams []*stream
+		hdrs[i], streams = e.finish()
+		reps[i].Codec = e.describe()
+		reps[i].StreamBytes = uint64(len(hdrs[i]))
+		for _, s := range streams {
+			sg := &segment{col: i, width: s.width, raw: s.buf}
+			segs[i] = append(segs[i], sg)
+			all = append(all, sg)
+			reps[i].StreamBytes += uint64(len(s.buf))
+		}
 		encs[i] = nil
+	}
+	slices.SortFunc(all, func(a, b *segment) int { return len(b.raw) - len(a.raw) })
+	parallel(len(all), opt.Workers, func(i int) {
+		all[i].comp = cm.Compress(all[i].raw, all[i].width)
 	})
+
+	blobs := make([][]byte, len(cols))
+	for i := range cols {
+		b := binary.AppendUvarint(nil, uint64(len(hdrs[i])))
+		b = append(b, hdrs[i]...)
+		b = append(b, byte(len(segs[i])))
+		for _, sg := range segs[i] {
+			b = binary.AppendUvarint(b, uint64(len(sg.raw)))
+			b = append(b, byte(sg.width))
+			b = binary.AppendUvarint(b, uint64(len(sg.comp)))
+			b = append(b, sg.comp...)
+		}
+		blobs[i] = b
+		reps[i].EncBytes = uint64(len(b))
+	}
 
 	bw := bufio.NewWriterSize(out, 1<<20)
 	h := []byte(magic)
@@ -119,11 +143,60 @@ func Encode(in io.ReadSeeker, cols []schema.Column, out io.Writer, opt Options) 
 	return rows, reps, bw.Flush()
 }
 
-// Decode writes the TSV reconstructed from an encoded file. Columns are
-// decoded concurrently in chunks of rows and stitched back into lines.
-func Decode(data []byte, out io.Writer) (uint64, error) {
+type parsedColumn struct {
+	hdr  header
+	segs []*segment
+}
+
+func parseBlob(col int, b []byte) (*parsedColumn, error) {
+	bad := fmt.Errorf("codec: column %d: corrupt blob", col)
+	n, k := binary.Uvarint(b)
+	if k <= 0 || uint64(len(b)-k) < n+1 {
+		return nil, bad
+	}
+	pc := &parsedColumn{hdr: header{buf: b[k : k+int(n)]}}
+	b = b[k+int(n):]
+	nseg := int(b[0])
+	b = b[1:]
+	for range nseg {
+		raw, k := binary.Uvarint(b)
+		if k <= 0 || len(b) < k+1 {
+			return nil, bad
+		}
+		width := int(b[k])
+		b = b[k+1:]
+		size, k := binary.Uvarint(b)
+		if k <= 0 || uint64(len(b)-k) < size {
+			return nil, bad
+		}
+		pc.segs = append(pc.segs, &segment{col: col, width: width, raw: make([]byte, 0, raw), comp: b[k : k+int(size)]})
+		b = b[k+int(size):]
+	}
+	return pc, nil
+}
+
+func newDecoder(c schema.Column, pc *parsedColumn) (dec decoder, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			err = fmt.Errorf("codec: column %s: %v", c.Name, r)
+		}
+	}()
+	readers := make([]*reader, len(pc.segs))
+	for i, sg := range pc.segs {
+		readers[i] = &reader{buf: sg.raw, width: sg.width}
+	}
+	switch pc.hdr.get(1) {
+	case kindInt:
+		return newIntDecoder(c, &pc.hdr, readers)
+	case kindBytes:
+		return newBytesDecoder(c, &pc.hdr, readers)
+	}
+	return nil, errors.New("unknown blob kind")
+}
+
+func Decode(data []byte, out io.Writer, workers int) (uint64, error) {
 	if len(data) < 16 || string(data[:4]) != magic {
-		return 0, errors.New("codec: not an HBC1 file")
+		return 0, errors.New("codec: not an " + magic + " file")
 	}
 	rows := binary.LittleEndian.Uint64(data[4:])
 	ncols := int(binary.LittleEndian.Uint32(data[12:]))
@@ -148,23 +221,34 @@ func Decode(data []byte, out io.Writer) (uint64, error) {
 		sizes[i] = binary.LittleEndian.Uint64(data[p:])
 		p += 8
 	}
-	decs := make([]decoder, ncols)
-	for i, c := range cols {
+
+	parsed := make([]*parsedColumn, ncols)
+	var all []*segment
+	for i := range cols {
 		if uint64(len(data)-p) < sizes[i] {
 			return 0, errors.New("codec: truncated column data")
 		}
-		r := &bitReader{buf: data[p : p+int(sizes[i])]}
-		p += int(sizes[i])
-		var err error
-		switch r.read(8) {
-		case kindInt:
-			decs[i], err = newIntDecoder(c, r)
-		case kindBytes:
-			decs[i], err = newBytesDecoder(c, r)
-		default:
-			err = fmt.Errorf("codec: column %s: unknown blob kind", c.Name)
-		}
+		pc, err := parseBlob(i, data[p:p+int(sizes[i])])
 		if err != nil {
+			return 0, err
+		}
+		p += int(sizes[i])
+		parsed[i] = pc
+		all = append(all, pc.segs...)
+	}
+	slices.SortFunc(all, func(a, b *segment) int { return cap(b.raw) - cap(a.raw) })
+	errs := make([]error, len(all))
+	parallel(len(all), workers, func(i int) {
+		all[i].raw, errs[i] = cm.Decompress(all[i].comp, cap(all[i].raw), all[i].width)
+	})
+	if err := errors.Join(errs...); err != nil {
+		return 0, err
+	}
+
+	decs := make([]decoder, ncols)
+	for i, c := range cols {
+		var err error
+		if decs[i], err = newDecoder(c, parsed[i]); err != nil {
 			return 0, err
 		}
 	}

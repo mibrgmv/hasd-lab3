@@ -3,72 +3,55 @@ package codec
 import (
 	"fmt"
 	"math/bits"
-	"slices"
 	"strconv"
 
 	"hasd/lab3/internal/schema"
 	"hasd/lab3/internal/textval"
 )
 
-// Column blob layout, one bit stream per column:
-//
-//	kind:8 method:8 rle:8 <method parameters> <row codes>
-//
-// With rle every run of equal values is written once as <value code><run
-// length - 1>; otherwise each row gets its own value code.
 const (
 	kindInt   = 1
 	kindBytes = 2
 )
 
 const (
-	methodConst = iota // one value for the whole column, no row codes
-	methodPlain        // ints: value - min; bytes: length + raw bytes
-	methodDelta        // ints: zigzag(value - previous value)
-	methodDict         // index into a sorted dictionary of distinct values
+	methodConst = iota
+	methodPlain
+	methodDelta
+	methodDict
 )
 
 var methodNames = [...]string{"const", "plain", "delta", "dict"}
 
-// dictCap bounds the distinct values tracked per column; beyond it a
-// dictionary would not pay off and the tables would eat too much memory.
 const dictCap = 1 << 22
 
-type intEntry struct {
-	v            uint64
-	count, heads uint32
-}
-
-// intColumn handles Int, Date and DateTime columns. Values are parsed into
-// uint64 (two's complement for signed kinds, days or seconds for dates).
 type intColumn struct {
 	col    schema.Column
 	signed bool
 
-	// pass 1 statistics; a "head" is a row whose value differs from the
-	// previous row, i.e. the start of a run
 	rows, runs, raw  uint64
-	bad              bool // non-canonical text seen: the column is stored as bytes
+	bad              bool
 	started          bool
 	first, prev      uint64
 	min, max         uint64
 	runLen           uint64
-	runHist          [65]uint64 // width of run length - 1
-	deltaAll, deltaH [65]uint64 // width of zigzag(value - previous), all rows / heads
+	runHist          [65]uint64
+	deltaAll, deltaH [65]uint64
 	index            map[uint64]uint32
-	entries          []intEntry
+	entries          []uint64
 	overflow         bool
 
-	// plan and pass 2
-	method   byte
-	rle      bool
-	base     uint64
-	constant uint64
-	val, run uintCode
-	w        bitWriter
-	encPrev  uint64
-	runVal   uint64
-	runN     uint64
+	method    byte
+	rle       bool
+	base      uint64
+	h         header
+	dict      stream
+	vals      stream
+	runStream stream
+	encPrev   uint64
+	fresh     uint32
+	runVal    uint64
+	runN      uint64
 }
 
 func newIntColumn(c schema.Column) *intColumn {
@@ -131,20 +114,14 @@ func (c *intColumn) observe(v []byte) {
 	if c.overflow {
 		return
 	}
-	i, ok := c.index[x]
-	if !ok {
+	if _, ok := c.index[x]; !ok {
 		if len(c.entries) == dictCap {
 			c.overflow = true
 			c.index, c.entries = nil, nil
 			return
 		}
-		i = uint32(len(c.entries))
-		c.index[x] = i
-		c.entries = append(c.entries, intEntry{v: x})
-	}
-	c.entries[i].count++
-	if head {
-		c.entries[i].heads++
+		c.index[x] = uint32(len(c.entries))
+		c.entries = append(c.entries, x)
 	}
 }
 
@@ -155,103 +132,68 @@ func (c *intColumn) less(a, b uint64) bool {
 	return a < b
 }
 
-type intCand struct {
+type candidate struct {
 	method byte
 	rle    bool
-	val    uintCode
+	width  int
 	cost   uint64
 }
 
-// plan picks the cheapest encoding from the exact sizes implied by the pass-1
-// statistics and writes the column header.
-func (c *intColumn) plan() encoder {
-	if c.bad {
-		return newRawBytesColumn(c.col)
-	}
-	c.runHist[bits.Len64(c.runLen-1)]++
-	rangeBits := bits.Len64(c.max - c.min)
-
-	// widths of value - min, for all rows and for run heads
-	var forAll, forH [65]uint64
-	if c.overflow {
-		forAll[rangeBits], forH[rangeBits] = c.rows, c.runs
-	} else {
-		for _, e := range c.entries {
-			w := bits.Len64(e.v - c.min)
-			forAll[w] += uint64(e.count)
-			forH[w] += uint64(e.heads)
-		}
-	}
-
-	// The dictionary is sorted; entry i is stored as the gap to entry i-1
-	// minus one (entry 0 is the minimum itself).
-	var gapHist [65]uint64
-	if !c.overflow {
-		slices.SortFunc(c.entries, func(a, b intEntry) int {
-			return cmpU64(a.v-c.min, b.v-c.min)
-		})
-		for i := 1; i < len(c.entries); i++ {
-			gapHist[bits.Len64(c.entries[i].v-c.entries[i-1].v-1)]++
-		}
-	}
-	gapCode, gapCost := bestCode(&gapHist)
-
-	runCode, runCost := bestCode(&c.runHist)
-	var cands []intCand
-	if !c.overflow && len(c.entries) == 1 {
-		cands = append(cands, intCand{method: methodConst})
-	}
-	for _, rle := range []bool{false, true} {
-		n, extra, hFor, hDelta := c.rows, uint64(0), &forAll, &c.deltaAll
-		if rle {
-			n, extra, hFor, hDelta = c.runs, runCost, &forH, &c.deltaH
-		}
-		code, cost := bestCode(hFor)
-		cands = append(cands, intCand{methodPlain, rle, code, cost + extra})
-		code, cost = bestCode(hDelta)
-		cands = append(cands, intCand{methodDelta, rle, code, cost + extra})
-		if !c.overflow {
-			d := len(c.entries)
-			w := bits.Len(uint(d - 1))
-			cost := n*uint64(w) + gapCost
-			cands = append(cands, intCand{methodDict, rle, newUintCode(uint8(w)), cost + extra})
-		}
-	}
+func cheapest(cands []candidate) candidate {
 	best := cands[0]
 	for _, k := range cands[1:] {
 		if k.cost < best.cost {
 			best = k
 		}
 	}
+	return best
+}
 
-	c.method, c.rle, c.val, c.run = best.method, best.rle, best.val, runCode
-	c.base, c.encPrev = c.min, c.first
-	w := &c.w
-	w.write(kindInt, 8)
-	w.write(uint64(c.method), 8)
-	w.write(b2u(c.rle), 8)
+func (c *intColumn) plan() encoder {
+	if c.bad {
+		return newRawBytesColumn(c.col)
+	}
+	c.runHist[bits.Len64(c.runLen-1)]++
+	runW := widthOf(maxBits(&c.runHist))
+	rangeW := widthFor(c.max - c.min)
+
+	var cands []candidate
+	if !c.overflow && len(c.entries) == 1 {
+		cands = append(cands, candidate{method: methodConst})
+	}
+	for _, rle := range []bool{false, true} {
+		n, extra, hDelta := c.rows, uint64(0), &c.deltaAll
+		if rle {
+			n, extra, hDelta = c.runs, c.runs*uint64(runW), &c.deltaH
+		}
+		dw := widthOf(maxBits(hDelta))
+		cands = append(cands, candidate{methodDelta, rle, dw, n*uint64(dw) + extra})
+		if !c.overflow {
+			d := uint64(len(c.entries))
+			w := widthFor(d)
+			cands = append(cands, candidate{methodDict, rle, w, n*uint64(w) + d*uint64(rangeW) + extra})
+		}
+		cands = append(cands, candidate{methodPlain, rle, rangeW, n*uint64(rangeW) + extra})
+	}
+	best := cheapest(cands)
+
+	c.method, c.rle, c.base, c.encPrev = best.method, best.rle, c.min, c.first
+	c.vals.width, c.runStream.width = best.width, runW
+	c.h.put(kindInt, 1)
+	c.h.put(uint64(c.method), 1)
+	c.h.put(b2u(c.rle), 1)
 	switch c.method {
 	case methodConst:
-		c.constant = c.first
-		w.write(c.constant, 64)
+		c.h.put(c.first, 8)
 	case methodPlain, methodDelta:
-		w.write(c.base, 64)
-		w.write(c.first, 64)
-		c.val.save(w)
+		c.h.put(c.base, 8)
+		c.h.put(c.first, 8)
 	case methodDict:
-		w.write(c.base, 64)
-		w.write(uint64(len(c.entries)), 32)
-		gapCode.save(w)
-		for i, e := range c.entries {
-			if i > 0 {
-				gapCode.write(w, e.v-c.entries[i-1].v-1)
-			}
-			c.index[e.v] = uint32(i)
+		c.h.put(c.base, 8)
+		c.dict.width = rangeW
+		for _, v := range c.entries {
+			c.dict.put(v - c.base)
 		}
-		c.val.save(w)
-	}
-	if c.rle {
-		c.run.save(w)
 	}
 	c.entries = nil
 	if c.method != methodDict {
@@ -280,60 +222,91 @@ func (c *intColumn) encode(v []byte) {
 func (c *intColumn) flushRun() {
 	if c.runN > 0 {
 		c.emit(c.runVal)
-		c.run.write(&c.w, c.runN-1)
+		c.runStream.put(c.runN - 1)
 	}
 }
 
 func (c *intColumn) emit(x uint64) {
 	switch c.method {
 	case methodPlain:
-		c.val.write(&c.w, x-c.base)
+		c.vals.put(x - c.base)
 	case methodDelta:
-		c.val.write(&c.w, zigzag(int64(x-c.encPrev)))
+		c.vals.put(zigzag(int64(x - c.encPrev)))
 		c.encPrev = x
 	case methodDict:
-		c.val.write(&c.w, uint64(c.index[x]))
+		c.vals.put(dictCode(c.index[x], &c.fresh))
 	}
 }
 
-func (c *intColumn) finish() []byte {
+func dictCode(id uint32, fresh *uint32) uint64 {
+	if id == *fresh {
+		*fresh++
+		return 0
+	}
+	return uint64(*fresh - id)
+}
+
+func dictID(code uint64, fresh *uint32) uint32 {
+	if code == 0 {
+		*fresh++
+		return *fresh - 1
+	}
+	return *fresh - uint32(code)
+}
+
+func (c *intColumn) finish() ([]byte, []*stream) {
 	if c.rle {
 		c.flushRun()
 	}
 	c.index = nil
-	return c.w.bytes()
+	return c.h.buf, columnStreams(c.method, c.rle, &c.dict, &c.vals, &c.runStream)
+}
+
+func columnStreams(method byte, rle bool, dict, vals, runs *stream) []*stream {
+	var s []*stream
+	if method == methodDict {
+		s = append(s, dict)
+	}
+	if method != methodConst {
+		s = append(s, vals)
+	}
+	if rle {
+		s = append(s, runs)
+	}
+	return s
 }
 
 func (c *intColumn) describe() string {
-	return describe(c.method, c.rle, c.val, c.run)
+	return describe(c.method, c.rle, c.vals.width, c.runStream.width)
 }
 
-func describe(method byte, rle bool, val, run uintCode) string {
+func describe(method byte, rle bool, width, runWidth int) string {
 	s := methodNames[method]
 	if method != methodConst {
-		s += val.String()
+		s += "[" + strconv.Itoa(width) + "]"
 	}
 	if rle {
-		s += " rle" + run.String()
+		s += " rle[" + strconv.Itoa(runWidth) + "]"
 	}
 	return s
 }
 
 type intDecoder struct {
-	r        *bitReader
-	method   byte
-	rle      bool
-	base     uint64
-	prev     uint64
-	cur      uint64
-	left     uint64
-	val, run uintCode
-	dict     []uint64
-	format   func([]byte, uint64) []byte
+	method byte
+	rle    bool
+	base   uint64
+	prev   uint64
+	cur    uint64
+	left   uint64
+	fresh  uint32
+	vals   *reader
+	runs   *reader
+	dict   []uint64
+	format func([]byte, uint64) []byte
 }
 
-func newIntDecoder(col schema.Column, r *bitReader) (*intDecoder, error) {
-	d := &intDecoder{r: r, method: byte(r.read(8)), rle: r.read(8) == 1}
+func newIntDecoder(col schema.Column, h *header, segs []*reader) (*intDecoder, error) {
+	d := &intDecoder{method: byte(h.get(1)), rle: h.get(1) == 1}
 	switch {
 	case col.Kind == schema.Date:
 		d.format = func(b []byte, x uint64) []byte { return textval.AppendDate(b, int64(x)) }
@@ -348,28 +321,42 @@ func newIntDecoder(col schema.Column, r *bitReader) (*intDecoder, error) {
 	}
 	switch d.method {
 	case methodConst:
-		d.cur = r.read(64)
-		return d, nil
+		d.cur = h.get(8)
 	case methodPlain, methodDelta:
-		d.base = r.read(64)
-		d.prev = r.read(64)
-		d.val = loadUintCode(r)
+		d.base = h.get(8)
+		d.prev = h.get(8)
 	case methodDict:
-		d.base = r.read(64)
-		d.dict = make([]uint64, r.read(32))
-		gap := loadUintCode(r)
-		d.dict[0] = d.base
-		for i := 1; i < len(d.dict); i++ {
-			d.dict[i] = d.dict[i-1] + gap.read(r) + 1
-		}
-		d.val = loadUintCode(r)
+		d.base = h.get(8)
 	default:
 		return nil, fmt.Errorf("codec: column %s: unknown method %d", col.Name, d.method)
 	}
-	if d.rle {
-		d.run = loadUintCode(r)
+	var err error
+	d.vals, d.runs, segs, err = splitSegs(col, d.method, d.rle, segs)
+	if err != nil {
+		return nil, err
+	}
+	if d.method == methodDict {
+		r := segs[0]
+		d.dict = make([]uint64, 0, len(r.buf)/max(r.width, 1))
+		for r.pos < len(r.buf) {
+			d.dict = append(d.dict, d.base+r.get())
+		}
 	}
 	return d, nil
+}
+
+func splitSegs(col schema.Column, method byte, rle bool, segs []*reader) (vals, runs *reader, rest []*reader, err error) {
+	want := len(columnStreams(method, rle, &stream{}, &stream{}, &stream{}))
+	if len(segs) != want {
+		return nil, nil, nil, fmt.Errorf("codec: column %s: %d streams, want %d", col.Name, len(segs), want)
+	}
+	if rle {
+		runs, segs = segs[len(segs)-1], segs[:len(segs)-1]
+	}
+	if method != methodConst {
+		vals, segs = segs[len(segs)-1], segs[:len(segs)-1]
+	}
+	return vals, runs, segs, nil
 }
 
 func (d *intDecoder) next(dst []byte) []byte {
@@ -380,7 +367,7 @@ func (d *intDecoder) next(dst []byte) []byte {
 	default:
 		if d.left == 0 {
 			d.cur = d.value()
-			d.left = d.run.read(d.r) + 1
+			d.left = d.runs.get() + 1
 		}
 		d.left--
 	}
@@ -388,7 +375,7 @@ func (d *intDecoder) next(dst []byte) []byte {
 }
 
 func (d *intDecoder) value() uint64 {
-	v := d.val.read(d.r)
+	v := d.vals.get()
 	switch d.method {
 	case methodPlain:
 		return d.base + v
@@ -396,21 +383,11 @@ func (d *intDecoder) value() uint64 {
 		d.prev += uint64(unzigzag(v))
 		return d.prev
 	}
-	return d.dict[v]
+	return d.dict[dictID(v, &d.fresh)]
 }
 
 func b2u(b bool) uint64 {
 	if b {
-		return 1
-	}
-	return 0
-}
-
-func cmpU64(a, b uint64) int {
-	switch {
-	case a < b:
-		return -1
-	case a > b:
 		return 1
 	}
 	return 0

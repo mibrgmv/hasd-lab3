@@ -95,11 +95,11 @@ func checkFlags(workers, chunkMB int) {
 
 func report(w io.Writer, rows uint64, reps []codec.ColumnReport, inSize, outSize int64, elapsed time.Duration) {
 	slices.SortStableFunc(reps, func(a, b codec.ColumnReport) int { return int(b.EncBytes) - int(a.EncBytes) })
-	fmt.Fprintf(w, "%3s  %-27s %-16s %9s %9s %7s %8s  %s\n", "#", "column", "type", "TSV MB", "enc MB", "enc %", "bit/row", "codec")
+	fmt.Fprintf(w, "%3s  %-27s %-16s %9s %10s %9s %7s %8s  %s\n", "#", "column", "type", "TSV MB", "stream MB", "enc MB", "enc %", "bit/row", "codec")
 	for _, r := range reps {
-		fmt.Fprintf(w, "%3d  %-27s %-16s %9.1f %9.3f %6.2f%% %8.3f  %s\n",
-			r.Column.Index+1, r.Column.Name, r.Column.Type, float64(r.RawBytes)/1e6, float64(r.EncBytes)/1e6,
-			100*float64(r.EncBytes)/float64(r.RawBytes), 8*float64(r.EncBytes)/float64(rows), r.Codec)
+		fmt.Fprintf(w, "%3d  %-27s %-16s %9.1f %10.3f %9.3f %6.2f%% %8.3f  %s\n",
+			r.Column.Index+1, r.Column.Name, r.Column.Type, float64(r.RawBytes)/1e6, float64(r.StreamBytes)/1e6,
+			float64(r.EncBytes)/1e6, 100*float64(r.EncBytes)/float64(r.RawBytes), 8*float64(r.EncBytes)/float64(rows), r.Codec)
 	}
 	fmt.Fprintf(w, "\nrows %d: %.1f MB -> %.1f MB (%.2f%%, %.2fx) in %v, %.0f MB/s\n",
 		rows, float64(inSize)/1e6, float64(outSize)/1e6, 100*float64(outSize)/float64(inSize),
@@ -109,10 +109,12 @@ func report(w io.Writer, rows uint64, reps []codec.ColumnReport, inSize, outSize
 func decode(args []string) {
 	fs := flag.NewFlagSet("decode", flag.ExitOnError)
 	outPath := fs.String("o", "-", "output file, - for stdout")
+	workers := fs.Int("workers", runtime.NumCPU(), "worker goroutines")
 	fs.Parse(args)
 	if fs.NArg() != 1 {
 		log.Fatal("usage: hits decode [-o out.tsv] in.hbc")
 	}
+	checkFlags(*workers, 1)
 
 	start := time.Now()
 	data, err := os.ReadFile(fs.Arg(0))
@@ -126,7 +128,7 @@ func decode(args []string) {
 		}
 	}
 	bw := bufio.NewWriterSize(out, 4<<20)
-	rows, err := codec.Decode(data, bw)
+	rows, err := codec.Decode(data, bw, *workers)
 	if err == nil {
 		err = bw.Flush()
 	}
